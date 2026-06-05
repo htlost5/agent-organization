@@ -2,7 +2,6 @@
 name: "Agent Implementer"
 description: "使用場面: Agent Architect の設計案に基づき、.agent.md / .instructions.md / .prompt.md / SKILL.md / copilot-instructions.md / AGENTS.md ファイルの作成・編集・更新を実際に行う。変更前に全内容をユーザーに一括提示し承認を得てから実行する。Use when: implementing agent customization proposals — creating or editing customization files based on an approved design plan from Agent Architect."
 tools: [read, search, edit]
-user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
 ---
 

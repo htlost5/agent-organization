@@ -1,7 +1,7 @@
 ---
 name: "Agent Architect"
 description: "Use when: designing new agent customization files, reviewing existing .agent.md / .instructions.md / .prompt.md / SKILL.md / copilot-instructions.md / AGENTS.md for issues, proposing fixes or improvements to agent configurations, or planning agent architectures. Read-only reasoning specialist — does NOT edit files."
-tools: [read, search, web, agent]
+tools: [vscode/memory, vscode/askQuestions, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/readNotebookCellOutput, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/usages, web/fetch, web/githubRepo, web/githubTextSearch, todo]
 user-invocable: true
 agents: ["Agent Implementer"]
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
