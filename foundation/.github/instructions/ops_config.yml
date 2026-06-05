@@ -1,0 +1,28 @@
+## Ops configuration: shared resource limits and thresholds
+# This file is referenced by Orchestrator and other agents for adjustable limits.
+
+research:
+  search_limit: 3            # 基本検索回数
+  extra_search: 2            # 追加検索許容回数
+  redo_same_topic: 1        # 同一論点掘り直し回数
+
+implementation:
+  implementation_attempts: 3 # 実装試行回数
+  fix_cycles: 2             # 同一箇所の修正サイクル
+  test_retries: 3           # テスト再実行回数
+
+design:
+  proposals_min: 2
+  proposals_max: 3
+  comparisons: 2
+  spec_refinements: 1
+
+same_method_limits:
+  consecutive_search_same_keyword: 2
+  same_file_same_strategy: 2
+  same_testcase_retries: 2
+
+confidence_thresholds:
+  low: 0.70
+  medium: 0.85
+  high: 0.95
