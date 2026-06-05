@@ -52,3 +52,11 @@ tags:
 
 - `_inbox/` 内のファイル名は `YYYY-MM-DD_HHMM_{AgentID}_{slug}.md` に従う。
   詳細は [obsidian_structure.instructions.md](obsidian_structure.instructions.md) を参照。
+
+### 3.5 品質チェックリスト（文書レビュー初期ゲート）
+
+- フロントマターが完全である（agent / task_id / date / status / category / destination / related / tags が記載されていること）
+- 作成者と Orchestrator の責任者（または承認者）の記載があること
+- 未確定事項（open questions）が明示されていること
+- 受入条件 / 完了判定が明記されていること
+- 保存先（shared パス）が明記されていること

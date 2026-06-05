@@ -1,7 +1,14 @@
 ---
 name: Researcher
-description: search the information from web
-tools: [agent]
+description: >
+  Research and collect information from web and local sources.
+  Use when: searching for technical information, investigating alternatives,
+  gathering data, analyzing trends, performing web research, or exploring
+  documentation. Suitable for RES (Researcher) agent role.
+user-invocable: false
+model: DeepSeek: DeepSeek V4 Flash (openrouter)
+tools: [read, search, web]
+agents: []
 ---
 
 # Researcher

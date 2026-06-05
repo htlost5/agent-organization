@@ -130,10 +130,7 @@ agents:
 
 ## Tooling / Dependencies
 
-- ObsidianMCP（共有保存が必要な場合のみ）
-- 内部メモリ（フロー、状態、決定事項、未確定事項の保持）
-- サブエージェント呼び出し
-- 必要に応じてネット検索
+サブエージェント呼び出し、内部メモリ（フロー・状態管理）、必要に応じたネット検索・ObsidianMCP 連携。
 
 ## Interactions
 
@@ -186,21 +183,3 @@ ORC ──→ EXD ──→ shared/decisions/experiment/EXP-XXX.md
 ## Completion Criteria
 
 ユーザの依頼がフローで完了し、未確定事項が残らず、失敗事項は原因と次アクションを提示した状態。
-
-## Quality Bar
-
-合格基準チェックリスト（簡易）:
-
-- フロントマターが完全である（agent / task_id / date / status / category / destination / related / tags が記載されていること）
-- 作成者と Orchestrator の責任者（または承認者）の記載があること
-- 未確定事項（open questions）が明示されていること
-- 受入条件 / 完了判定が明記されていること
-- 保存先（shared パス）が明記されていること
-
-このチェックリストは文書レビューの初期ゲートとして使用する。
-
-## Forbidden Actions
-
-- 詳細な禁止事項は `.github/instructions/obsidian_rules.instructions.md` を参照すること。
-- Orchestrator 固有の禁止事項:
-  - 推測での最終決定を行わないこと。
