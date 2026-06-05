@@ -1,6 +1,7 @@
 ---
 name: Obsidian Structure Rules
 description: Define the Obsidian Structure
+applyTo: '**'
 ---
 
 ## 1. エージェント一覧
@@ -11,7 +12,7 @@ description: Define the Obsidian Structure
 
 `DEV`: DevPlanner
 
-`ARC`: Architecter
+`ARC`: Architect
 
 `IMP`: Implementer
 
@@ -53,8 +54,10 @@ vault/
 │   ├── specs/                       # 仕様書（次工程への引き継ぎドキュメント）
 │   │   ├── requirements/            # 要件定義（DEV → ARC への引き継ぎ）
 │   │   │   └── REQ-{ID}_{title}.md
-│   │   └── interfaces/              # インターフェース仕様（ARC → IMP への引き継ぎ）
-│   │       └── IF-{ID}_{title}.md
+│   │   ├── interfaces/              # インターフェース仕様（ARC → IMP への引き継ぎ）
+│   │   │   └── IF-{ID}_{title}.md
+│   │   └── experiment-results/      # 実験結果分析仕様（EXD → ANL への引き継ぎ）
+│   │       └── ER-{ID}_{title}.md
 │   │
 │   └── context/                     # プロジェクト共通知識（常時参照）
 │       ├── project-meta.md          # プロジェクト概要・目標・制約

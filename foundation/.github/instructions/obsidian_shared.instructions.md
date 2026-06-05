@@ -1,6 +1,7 @@
 ---
 name: Obsidian Shared Folder Rules
 description: Rules for shared task, decision, spec, and context files
+applyTo: '**'
 ---
 
 # shared/ フォルダ詳細仕様
@@ -27,6 +28,7 @@ description: Rules for shared task, decision, spec, and context files
 
 - `requirements/` は DEV → ARC への要件引き継ぎに使う。
 - `interfaces/` は ARC → IMP へのインターフェース引き継ぎに使う。
+- `experiment-results/` は EXD → ANL への実験結果分析仕様の引き継ぎに使う。
 - 仕様は次工程がそのまま実装・設計に使える粒度で書く。
 
 ## shared/context/

@@ -1,6 +1,7 @@
 ---
 name: Obsidian Format Rules
 description: Rules for All Files Construction
+applyTo: '**'
 ---
 
 ## 共通ルール
@@ -28,25 +29,12 @@ tags:
 
 ### 3.2 ステータス定義
 
-status
-意味
-次のアクション
-
-`draft`
-作成中・未完了
-作成エージェントが完成後 `pending` へ更新
-
-`pending`
-レビュー・承認待ち
-Orchestrator または指定エージェントが確認
-
-`approved`
-承認済み・正式反映
-正式ディレクトリへ移動
-
-`archived`
-完了・参照専用
-`archive/` サブフォルダへ移動
+| status       | 意味               | 次のアクション                                |
+|--------------|--------------------|---------------------------------------------|
+| `draft`      | 作成中・未完了      | 作成エージェントが完成後 `pending` へ更新       |
+| `pending`    | レビュー・承認待ち  | Orchestrator または指定エージェントが確認       |
+| `approved`   | 承認済み・正式反映  | 正式ディレクトリへ移動                        |
+| `archived`   | 完了・参照専用      | `archive/` サブフォルダへ移動                 |
 
 ### 3.3 タグ体系
 
@@ -59,3 +47,8 @@ Orchestrator または指定エージェントが確認
 優先度             #priority-high #priority-medium #priority-low
 状態               #blocked #in-progress #done
 ```
+
+### 3.4 命名規則
+
+- `_inbox/` 内のファイル名は `YYYY-MM-DD_HHMM_{AgentID}_{slug}.md` に従う。
+  詳細は [obsidian_structure.instructions.md](obsidian_structure.instructions.md) を参照。
