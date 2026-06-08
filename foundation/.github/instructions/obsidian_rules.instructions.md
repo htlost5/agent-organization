@@ -3,7 +3,7 @@ name: Obsidian Common Rules
 description: Common rules for all agents
 ---
 
-## 4. 権限まとめ
+## 1. 権限まとめ
 
 | エージェント | `_inbox/` | `shared/tasks/` | `shared/decisions/` | `shared/specs/` | `shared/context/` | `logs/`                |
 | ------------ | --------- | --------------- | ------------------- | --------------- | ----------------- | ---------------------- |
@@ -20,7 +20,7 @@ description: Common rules for all agents
 
 ---
 
-## 5. 禁止事項・注意事項
+## 2. 禁止事項・注意事項
 
 1. `_inbox/` をスキップして直接 `shared/` や `logs/` に書き込まない
 
@@ -34,7 +34,7 @@ description: Common rules for all agents
 
 6. `shared/context/project-meta.md` と `glossary.md` の更新は必ず Orchestrator の承認を経ること
 
-## 6. 命名規則
+## 3. 命名規則
 
 - `_inbox/` 内のファイル名は `YYYY-MM-DD_HHMM_{AgentID}_{slug}.md` に従う。
   詳細は [obsidian_structure.instructions.md](obsidian_structure.instructions.md) を参照。
