@@ -1,7 +1,6 @@
 ---
 name: Obsidian Structure Rules
 description: Define the Obsidian Structure
-applyTo: '**'
 ---
 
 ## 1. エージェント一覧

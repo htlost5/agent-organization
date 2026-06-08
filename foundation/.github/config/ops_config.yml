@@ -26,3 +26,135 @@ confidence_thresholds:
   low: 0.70
   medium: 0.85
   high: 0.95
+
+# ── Inbox Auto-Approval ──
+inbox_approval:
+  auto_approve:
+    RES: ["logs/research/"]
+    DEV: ["shared/decisions/design/", "shared/specs/requirements/"]
+    ARC: ["shared/decisions/architecture/", "shared/specs/interfaces/"]
+    EXD: ["shared/decisions/experiment/"]
+    IMP: []
+    REV: []
+    TST: []
+    REL: []
+    ANL: []
+  auto_approve_conditions:
+    - frontmatter_complete: true
+    - quality_checklist_pass: true
+
+# ── Flow Shortcuts ──
+flow_shortcuts:
+  trivial:
+    description: "typo fix, simple config change, one-line patch"
+    flow: [IMP, TST, REL]
+    skip: [RES, DEV, ARC, REV]
+  simple:
+    description: "add a small utility function, minor feature addition"
+    flow: [DEV, IMP, REV, TST, REL]
+    skip: [RES, ARC]
+  standard:
+    description: "full implementation flow"
+    flow: [RES, DEV, ARC, IMP, REV, TST, REL]
+    skip: []
+  research:
+    description: "research and analysis only, no implementation"
+    flow: [RES, EXD, ANL]
+    skip: [DEV, ARC, IMP, REV, TST, REL]
+
+# ── Error Handling ──
+error_handling:
+  # RES
+  res_no_results:
+    max_retries: 2
+    retry_strategy: "alternate_keywords"
+    escalation: "ORC redesigns search query"
+    fallback: "estimate from existing knowledge base"
+    notify_user: false
+  res_low_confidence:
+    threshold: "low"
+    action: "return with low confidence flag; ORC decides whether to dig deeper"
+
+  # DEV
+  dev_ambiguous_requirements:
+    max_retries: 1
+    action: "escalate to ORC for user clarification"
+    notify_user: true
+  dev_conflicting_requirements:
+    action: "submit conflict list with priority proposal to ORC for arbitration"
+
+  # ARC
+  arc_no_suitable_tech:
+    max_retries: 1
+    retry_strategy: "constraint_relaxation"
+    escalation: "request ORC to adjust constraints"
+    fallback: "recommend closest tech stack with risk notes"
+  arc_interface_undefined:
+    action: "return to DEV for requirement concretization"
+
+  # IMP
+  imp_build_failure:
+    max_retries: 3
+    retry_strategy: "error_analysis_first"
+    escalation_after: 2
+    escalation: "request ARC to review design"
+    notify_user: false
+  imp_same_spot_loop:
+    max_cycles: 2
+    escalation: "request ORC manual judgment"
+    notify_user: true
+
+  # REV
+  rev_critical_found:
+    action: "return CRITICAL with issue list to IMP"
+    max_round_trips: 3
+    escalation_after: 3
+    escalation: "ORC decides: manual fix or user confirmation"
+    notify_user: true
+  rev_spec_mismatch:
+    severity: "conditional_approval"
+    condition: "non_functional_minor"
+
+  # TST
+  tst_test_failure:
+    max_retries: 3
+    retry_strategy: "same_tests"
+    escalation_after: 2
+    escalation: "return to IMP for fix"
+    notify_user: false
+  tst_same_testcase_loop:
+    max_retries: 2
+    escalation: "ORC judges test validity"
+    notify_user: true
+
+  # REL
+  rel_build_failure:
+    max_retries: 1
+    action: "report build error log to ORC"
+    escalation: "request IMP to fix build error"
+  rel_merge_conflict:
+    action: "request IMP to resolve via ORC"
+    notify_user: false
+
+  # EXD
+  exd_unmeasurable:
+    action: "propose alternative evaluation metrics, confirm with ORC"
+    notify_user: true
+
+  # ANL
+  anl_insufficient_data:
+    action: "identify missing data types; request RES or EXD to collect more"
+    escalation: "ORC decides whether additional collection is needed"
+
+  # Cross-cutting
+  agent_timeout:
+    action: "ORC retries same task with different model or agent"
+    max_reassign: 1
+    after_reassign: "report to user for manual judgment"
+  budget_exceeded:
+    trigger: "search_limit or implementation_attempts exhausted"
+    action: "ORC reports best intermediate result as final"
+    notify_user: true
+  infinite_loop_detection:
+    trigger: "same agent-pair round-trip exceeds 3 times"
+    action: "ORC forces interruption and requests user judgment"

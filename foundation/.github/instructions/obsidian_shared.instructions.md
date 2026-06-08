@@ -1,7 +1,6 @@
 ---
 name: Obsidian Shared Folder Rules
 description: Rules for shared task, decision, spec, and context files
-applyTo: '**'
 ---
 
 # shared/ フォルダ詳細仕様

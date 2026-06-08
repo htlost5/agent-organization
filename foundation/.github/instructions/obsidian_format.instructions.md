@@ -1,7 +1,6 @@
 ---
 name: Obsidian Format Rules
 description: Rules for All Files Construction
-applyTo: '**'
 ---
 
 ## 共通ルール

@@ -1,7 +1,6 @@
 ---
 name: Obsidian Common Rules
 description: Common rules for all agents
-applyTo: '**'
 ---
 
 ## 4. 権限まとめ
