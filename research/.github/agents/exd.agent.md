@@ -7,7 +7,7 @@ description: >
   Suitable for EXD (Experiment Designer) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, web]
+tools: [read, search, web, obsidian/*]
 agents: []
 ---
 

@@ -3,7 +3,7 @@ name: Orchestrator
 description: Orchestrates sub-agents (RES/DEV/ARC/IMP/REV/TST/REL/EXD/ANL) and controls end-to-end task flow
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, agent, todo]
+tools: [read, search, agent, todo, obsidian/*]
 agents:
   [
     "Researcher",          # foundation（固定）

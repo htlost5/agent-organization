@@ -7,7 +7,7 @@ description: >
   documentation. Suitable for RES (Researcher) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, search, web]
+tools: [read, search, web, obsidian/*]
 agents: []
 ---
 

@@ -6,7 +6,7 @@ description: >
   requirements. Suitable for TST (Tester) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, execute]
+tools: [read, execute, obsidian/*]
 agents: []
 ---
 

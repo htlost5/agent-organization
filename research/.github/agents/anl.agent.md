@@ -7,7 +7,7 @@ description: >
   with users. Suitable for ANL (Analyst) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search]
+tools: [read, search, obsidian/*]
 agents: []
 ---
 

@@ -6,7 +6,7 @@ description: >
   applications. Suitable for IMP (Implementer) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, search, edit, execute]
+tools: [read, search, edit, execute, obsidian/*]
 agents: []
 ---
 

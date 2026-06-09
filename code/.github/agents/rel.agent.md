@@ -6,7 +6,7 @@ description: >
   or handling version management. Suitable for REL (Release Manager) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, execute]
+tools: [read, execute, obsidian/*]
 agents: []
 ---
 
