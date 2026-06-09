@@ -60,7 +60,7 @@ agents: []
 
 ## Constraints
 
-- 権限・禁止事項は `.github/instructions/obsidian_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
 - テスト結果は事実ベースで記録し、原因分析は ANL または IMP に委ねる
 
 ## Interactions
@@ -68,3 +68,7 @@ agents: []
 - Orchestrator からのみタスクを受け付ける
 - 合格時は Orchestrator 経由で REL へ引き継ぐ
 - 不合格時は Orchestrator 経由で IMP へ差し戻す
+
+## Domain
+このエージェントは **code**（実装系）ドメインに属します。
+起動と統制は foundation の Orchestrator が行います。

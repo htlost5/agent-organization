@@ -5,25 +5,25 @@ description: Define the Obsidian Structure
 
 ## 1. エージェント一覧
 
-`ORC`: Orchestrator
+`ORC`: Orchestrator — foundation
 
-`RES`: Researcher
+`RES`: Researcher — foundation
 
-`DEV`: DevPlanner
+`DEV`: DevPlanner — code
 
-`ARC`: Architect
+`ARC`: Architect — code
 
-`IMP`: Implementer
+`IMP`: Implementer — code
 
-`REV`: Reviewer
+`REV`: Reviewer — code
 
-`TST`: Tester
+`TST`: Tester — code
 
-`REL`: Release Manager
+`REL`: Release Manager — code
 
-`EXD`: Experiment Designer
+`EXD`: Experiment Designer — research
 
-`ANL`: Analyst
+`ANL`: Analyst — research
 
 ---
 

@@ -49,18 +49,22 @@ flow_shortcuts:
     description: "typo fix, simple config change, one-line patch"
     flow: [IMP, TST, REL]
     skip: [RES, DEV, ARC, REV]
+    # See also: code/.github/copilot-instructions.md
   simple:
     description: "add a small utility function, minor feature addition"
     flow: [DEV, IMP, REV, TST, REL]
     skip: [RES, ARC]
+    # See also: code/.github/copilot-instructions.md
   standard:
     description: "full implementation flow"
     flow: [RES, DEV, ARC, IMP, REV, TST, REL]
     skip: []
+    # See also: code/.github/copilot-instructions.md
   research:
     description: "research and analysis only, no implementation"
     flow: [RES, EXD, ANL]
     skip: [DEV, ARC, IMP, REV, TST, REL]
+    # See also: research/.github/copilot-instructions.md
 
 # ── Error Handling ──
 error_handling:

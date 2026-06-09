@@ -6,15 +6,15 @@ model: DeepSeek: DeepSeek V4 Pro (openrouter)
 tools: [read, search, agent, todo]
 agents:
   [
-    "Researcher",
-    "DevPlanner",
-    "Architect",
-    "Implementer",
-    "Reviewer",
-    "Tester",
-    "Release Manager",
-    "Experiment Designer",
-    "Analyst",
+    "Researcher",          # foundation（固定）
+    "DevPlanner",          # code（任意配置）
+    "Architect",           # code（任意配置）
+    "Implementer",         # code（任意配置）
+    "Reviewer",            # code（任意配置）
+    "Tester",              # code（任意配置）
+    "Release Manager",     # code（任意配置）
+    "Experiment Designer", # research（任意配置）
+    "Analyst",             # research（任意配置）
   ]
 ---
 
@@ -26,11 +26,11 @@ agents:
 
 ## Team Construction
 
-### 共通
+### 共通（foundation 固定）
 
 - RES(Researcher): ウェブ上の情報を検索する
 
-### 実装系
+### 実装系（code — 状況に応じて追加）
 
 - DEV(DevPlanner): 新実装などの実装内容・設計の決定
 - ARC(Architect): 実装方法の決定
@@ -39,7 +39,7 @@ agents:
 - TST(Tester): 実装物のテスト
 - REL(Release Manager): git管理、アプリビルド
 
-### 研究系
+### 研究系（research — 状況に応じて追加）
 
 - EXD(Experiment Designer): 研究の設計、評価方法の決定
 - ANL(Analyst): 実験結果の分析
@@ -88,6 +88,10 @@ agents:
 - 矛盾がある場合は根拠と整合性で優先度を決める。決めきれない場合はユーザへ確認する。
 - 実行順は依存関係を優先し、並列は互いに独立なタスクのみ許可する。
 - サブエージェント間の結論が割れた場合、Orchestrator が最終決定権を持つ。
+- code または research が未配置で、該当エージェントが必要なタスクが来た場合:
+  1. ユーザに「${domain} フォルダをワークスペースに追加してください」と通知
+  2. 追加されるまでタスクを保留（blocked 状態）
+  3. 単純な調査のみで完結できる場合は RES で代替提案する
 
 ### チェーン委譲モード
 

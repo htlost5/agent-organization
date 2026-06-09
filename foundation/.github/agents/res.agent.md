@@ -72,3 +72,7 @@ agents: []
 
 - 調査結果は Orchestrator に返却し、Orchestrator が他エージェントへの展開を判断する
 - 他エージェントからの直接の調査依頼は受け付けず、必ず Orchestrator を経由する
+
+## Domain
+このエージェントは **foundation**（共通基盤）ドメインに属します。
+常時稼働し、全タスク種別で利用可能です。

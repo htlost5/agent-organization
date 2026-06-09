@@ -62,7 +62,7 @@ DevPlanner の要件定義に基づき、実装方法を決定する。システ
 
 ## Constraints
 
-- 権限・禁止事項は `.github/instructions/obsidian_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
 - 書き込みは `_inbox/` 経由で行い、承認後に `shared/` へ移動する
 - 出力は ARC の書き込み権限範囲（`shared/decisions/architecture/`, `shared/specs/interfaces/`, `logs/architecture/`）に限る
 
@@ -71,3 +71,7 @@ DevPlanner の要件定義に基づき、実装方法を決定する。システ
 - Orchestrator からのみタスクを受け付ける
 - 成果物は Orchestrator に返却し、Orchestrator が IMP へ引き継ぐ
 - DEV の成果物は Orchestrator 経由で受け取る
+
+## Domain
+このエージェントは **code**（実装系）ドメインに属します。
+起動と統制は foundation の Orchestrator が行います。

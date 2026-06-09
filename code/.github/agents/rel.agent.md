@@ -56,10 +56,14 @@ agents: []
 
 ## Constraints
 
-- 権限・禁止事項は `.github/instructions/obsidian_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
 - リリースログは `logs/releases/YYYY-MM-DD_REL_v{version}.md` の命名規則に従う
 
 ## Interactions
 
 - Orchestrator からのみタスクを受け付ける
 - 成果物（リリース情報）は Orchestrator に返却し、Orchestrator がユーザに報告する
+
+## Domain
+このエージェントは **code**（実装系）ドメインに属します。
+起動と統制は foundation の Orchestrator が行います。

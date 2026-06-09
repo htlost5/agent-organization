@@ -59,7 +59,7 @@ agents: []
 
 ## Constraints
 
-- 権限・禁止事項は `.github/instructions/obsidian_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
 - 書き込みは `_inbox/` 経由で行い、承認後に `shared/` へ移動する
 - 出力は EXD の書き込み権限範囲（`shared/decisions/experiment/`, `logs/experiments/`）に限る
 
@@ -68,3 +68,7 @@ agents: []
 - Orchestrator からのみタスクを受け付ける
 - 成果物は Orchestrator に返却し、Orchestrator が ANL へ引き継ぐ
 - RES の調査結果は Orchestrator 経由で受け取る
+
+## Domain
+このエージェントは **research**（研究系）ドメインに属します。
+起動と統制は foundation の Orchestrator が行います。
