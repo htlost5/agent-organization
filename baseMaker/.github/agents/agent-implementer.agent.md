@@ -57,3 +57,10 @@ model: DeepSeek: DeepSeek V4 Flash (openrouter)
 
 - **設計が必要な場合**: Agent Architect に委譲し、その Proposal を受け取ってから実装する
 - **コードベースの大規模探索が必要な場合**: Explore サブエージェントに委譲する
+
+## Context Minimization（トークン節約）
+
+- ファイル読み取り時は必ず行範囲（`startLine`/`endLine`）を指定し、必要最小限の範囲に絞ること
+- 未知のコードベースを探索する場合は、まず `search/textSearch` または `search/fileSearch` で関連箇所を特定すること
+- 全ファイル読み取り（行指定なしの `read_file`）は、その必要性を明確に説明できる場合のみ許可する
+- ORC から `Input Context` で指定されたファイル以外の読み取りは、明示的な必要性がある場合のみ行う
