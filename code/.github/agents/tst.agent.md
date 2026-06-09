@@ -22,7 +22,7 @@ agents: []
 - 統合テスト実行
 - アプリケーションテスト実行
 - テスト結果の合否判定
-- `logs/testing/` へのテスト実行ログ出力
+- `logs/impl/testing/` へのテスト実行ログ出力
 
 ## Out of Scope
 
@@ -34,14 +34,14 @@ agents: []
 ## Inputs
 
 - REV 承認済みの実装コード
-- DEV の要件定義書（`shared/specs/requirements/REQ-XXX.md`）
+- DEV の要件定義書（`shared/impl/specs/requirements/REQ-XXX.md`）
 - テスト仕様（存在する場合）
 
 ## Outputs
 
 - Test Result: 合格 / 不合格
 - 不合格時の失敗内容とエラー詳細
-- Testing Log: `logs/testing/YYYY-MM-DD_TST_{topic}.md`
+- Testing Log: `logs/impl/testing/YYYY-MM-DD_TST_{topic}.md`
 
 ## Workflow
 
@@ -49,7 +49,7 @@ agents: []
 2. テストを実行（ユニットテスト → 統合テスト → アプリテスト）
 3. テスト結果を集計し、合否を判定
 4. 不合格の場合はエラー詳細を記録
-5. テストログを `logs/testing/` に出力
+5. テストログを `logs/impl/testing/` に出力
 6. 結果を Orchestrator に返却
 
 ## Decision Rules

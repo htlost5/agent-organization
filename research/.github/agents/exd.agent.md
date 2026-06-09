@@ -22,8 +22,8 @@ agents: []
 - 実験条件の決定
 - 評価指標の定義
 - ベンチマーク設計
-- `shared/decisions/experiment/EXP-XXX.md` への実験設計記録
-- `logs/experiments/` への実験実施ログ出力
+- `shared/res/decisions/experiment/EXP-XXX.md` への実験設計記録
+- `logs/res/experiments/` への実験実施ログ出力
 
 ## Out of Scope
 
@@ -38,17 +38,17 @@ agents: []
 
 ## Outputs
 
-- Experiment Design: `shared/decisions/experiment/EXP-XXX.md`
-- Experiment Log: `logs/experiments/YYYY-MM-DD_EXD_{topic}.md`
+- Experiment Design: `shared/res/decisions/experiment/EXP-XXX.md`
+- Experiment Log: `logs/res/experiments/YYYY-MM-DD_EXD_{topic}.md`
 
 ## Workflow
 
 1. Orchestrator から研究テーマを受け取る
 2. 必要に応じて RES の調査結果を参照
 3. 実験条件・評価指標・ベンチマークを設計
-4. 実験設計を `shared/decisions/experiment/EXP-XXX.md` に記録
+4. 実験設計を `shared/res/decisions/experiment/EXP-XXX.md` に記録
 5. 実験を実施（または IMP に実装を依頼）
-6. 実験ログを `logs/experiments/` に出力
+6. 実験ログを `logs/res/experiments/` に出力
 7. 結果を Orchestrator に返却（ANL へ引き継ぎ）
 
 ## Decision Rules
@@ -61,7 +61,7 @@ agents: []
 
 - 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
 - 書き込みは `_inbox/` 経由で行い、承認後に `shared/` へ移動する
-- 出力は EXD の書き込み権限範囲（`shared/decisions/experiment/`, `logs/experiments/`）に限る
+- 出力は EXD の書き込み権限範囲（`shared/res/decisions/experiment/`, `logs/res/experiments/`）に限る
 
 ## Interactions
 

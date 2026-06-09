@@ -51,5 +51,5 @@
 
 ## 4. 実装系固有のエラーハンドリング
 
-詳細は foundation の `config/ops_config.yml` を参照。
+詳細は foundation の `.github/config/ops_config.yml` を参照。
 実装系に特に関連するセクション: `implementation`, `error_handling.imp_*`, `error_handling.rev_*`, `error_handling.tst_*`, `error_handling.rel_*`

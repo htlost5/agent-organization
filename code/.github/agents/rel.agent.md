@@ -21,7 +21,7 @@ agents: []
 - git コミット・ブランチ管理
 - アプリケーションビルド
 - リリース作成・バージョン管理
-- `logs/releases/` へのリリースログ出力
+- `logs/impl/releases/` へのリリースログ出力
 
 ## Out of Scope
 
@@ -38,7 +38,7 @@ agents: []
 
 - コミット・プッシュ完了
 - ビルド成果物
-- Release Log: `logs/releases/YYYY-MM-DD_REL_v{version}.md`
+- Release Log: `logs/impl/releases/YYYY-MM-DD_REL_v{version}.md`
 
 ## Workflow
 
@@ -46,7 +46,7 @@ agents: []
 2. 変更を git ステージング・コミット
 3. アプリケーションをビルド
 4. バージョンタグを付与
-5. リリースログを `logs/releases/` に出力
+5. リリースログを `logs/impl/releases/` に出力
 6. 結果を Orchestrator に返却
 
 ## Decision Rules
@@ -57,7 +57,7 @@ agents: []
 ## Constraints
 
 - 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
-- リリースログは `logs/releases/YYYY-MM-DD_REL_v{version}.md` の命名規則に従う
+- リリースログは `logs/impl/releases/YYYY-MM-DD_REL_v{version}.md` の命名規則に従う
 
 ## Interactions
 

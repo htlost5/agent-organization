@@ -38,5 +38,5 @@
 
 ## 4. 研究系固有のエラーハンドリング
 
-詳細は foundation の `config/ops_config.yml` を参照。
+詳細は foundation の `.github/config/ops_config.yml` を参照。
 研究系に特に関連するセクション: `error_handling.exd_*`, `error_handling.anl_*`

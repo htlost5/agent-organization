@@ -22,9 +22,9 @@ agents: []
 - 要件分析と要件定義書の作成
 - 機能仕様の決定
 - 設計判断（何を作るかの意思決定）
-- `shared/decisions/design/DD-XXX.md` への設計決定記録
-- `shared/specs/requirements/REQ-XXX.md` への要件定義書作成
-- `logs/planning/` へのプランニングログ出力
+- `shared/impl/decisions/design/DD-XXX.md` への設計決定記録
+- `shared/impl/specs/requirements/REQ-XXX.md` への要件定義書作成
+- `logs/impl/planning/` へのプランニングログ出力
 
 ## Out of Scope
 
@@ -41,18 +41,18 @@ agents: []
 
 ## Outputs
 
-- Design Decision: `shared/decisions/design/DD-XXX.md`
-- Requirements Specification: `shared/specs/requirements/REQ-XXX.md`
-- Planning Log: `logs/planning/YYYY-MM-DD_DEV_{topic}.md`
+- Design Decision: `shared/impl/decisions/design/DD-XXX.md`
+- Requirements Specification: `shared/impl/specs/requirements/REQ-XXX.md`
+- Planning Log: `logs/impl/planning/YYYY-MM-DD_DEV_{topic}.md`
 
 ## Workflow
 
 1. Orchestrator から実装依頼を受け取る
 2. 必要に応じて RES の調査結果を参照
 3. 要件を分析し、機能仕様を決定
-4. 設計判断を `shared/decisions/design/DD-XXX.md` に記録
-5. 要件定義書を `shared/specs/requirements/REQ-XXX.md` に出力
-6. プランニングログを `logs/planning/` に出力
+4. 設計判断を `shared/impl/decisions/design/DD-XXX.md` に記録
+5. 要件定義書を `shared/impl/specs/requirements/REQ-XXX.md` に出力
+6. プランニングログを `logs/impl/planning/` に出力
 7. 結果を Orchestrator に返却
 
 ## Decision Rules
@@ -65,7 +65,7 @@ agents: []
 
 - 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
 - 書き込みは `_inbox/` 経由で行い、承認後に `shared/` へ移動する
-- 出力は DEV の書き込み権限範囲（`shared/decisions/design/`, `shared/specs/requirements/`, `logs/planning/`）に限る
+- 出力は DEV の書き込み権限範囲（`shared/impl/decisions/design/`, `shared/impl/specs/requirements/`, `logs/impl/planning/`）に限る
 
 ## Interactions
 

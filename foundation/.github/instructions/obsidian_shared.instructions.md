@@ -18,16 +18,20 @@ description: Rules for shared task, decision, spec, and context files
 
 ## shared/decisions/
 
-- ARC は `architecture/` に構成・技術スタック・実装方針の決定を記録する。
-- DEV は `design/` に機能・仕様・UX などの決定を記録する。
-- EXD は `experiment/` に実験条件・評価指標・ベンチマーク設計を記録する。
+- 実装系（`shared/impl/decisions/`）:
+  - ARC は `architecture/` に構成・技術スタック・実装方針の決定を記録する。
+  - DEV は `design/` に機能・仕様・UX などの決定を記録する。
+- 研究系（`shared/res/decisions/`）:
+  - EXD は `experiment/` に実験条件・評価指標・ベンチマーク設計を記録する。
 - 承認済みの決定は無断で書き換えない。
 
 ## shared/specs/
 
-- `requirements/` は DEV → ARC への要件引き継ぎに使う。
-- `interfaces/` は ARC → IMP へのインターフェース引き継ぎに使う。
-- `experiment-results/` は EXD → ANL への実験結果分析仕様の引き継ぎに使う。
+- 実装系（`shared/impl/specs/`）:
+  - `requirements/` は DEV → ARC への要件引き継ぎに使う。
+  - `interfaces/` は ARC → IMP へのインターフェース引き継ぎに使う。
+- 研究系（`shared/res/specs/`）:
+  - `experiment-results/` は EXD → ANL への実験結果分析仕様の引き継ぎに使う。
 - 仕様は次工程がそのまま実装・設計に使える粒度で書く。
 
 ## shared/context/

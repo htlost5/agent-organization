@@ -167,31 +167,31 @@ agents:
              │                                                          ↑
              │ shared/tasks/active/TASK-XXX.md                         │
              ↓                                                          │
-            RES ──→ logs/research/                                      │
+            RES ──→ logs/res/research/                                  │
              │      └─ (key findings)→ shared/context/                 │
              ↓                                                          │
-            DEV ──→ shared/decisions/design/DD-XXX.md                  │
-             │      shared/specs/requirements/REQ-XXX.md               │
+            DEV ──→ shared/impl/decisions/design/DD-XXX.md             │
+             │      shared/impl/specs/requirements/REQ-XXX.md          │
              ↓                                                          │
-            ARC ──→ shared/decisions/architecture/ADR-XXX.md           │
-             │      shared/specs/interfaces/IF-XXX.md                  │
+            ARC ──→ shared/impl/decisions/architecture/ADR-XXX.md      │
+             │      shared/impl/specs/interfaces/IF-XXX.md             │
              ↓                                                          │
-            IMP ──→ logs/implementation/                               │
+            IMP ──→ logs/impl/implementation/                          │
              │    ←─ (差し戻し) ─────────────────────────────────┐     │
              ↓                                                    │     │
-            REV ──→ logs/review/ ─────────────────── CRITICAL →──┘     │
+            REV ──→ logs/impl/review/ ───────────────── CRITICAL →┘     │
              │      (Conditional Approval)                             │
              ↓                                                          │
-            TST ──→ logs/testing/                                       │
+            TST ──→ logs/impl/testing/                                  │
              │      (リリース承認)                                      │
              ↓                                                          │
-            REL ──→ logs/releases/ ─────────────────────────────────────┘
+            REL ──→ logs/impl/releases/ ───────────────────────────────┘
 
 【研究系フロー】
-ORC ──→ EXD ──→ shared/decisions/experiment/EXP-XXX.md
-                logs/experiments/
+ORC ──→ EXD ──→ shared/res/decisions/experiment/EXP-XXX.md
+                logs/res/experiments/
                     ↓
-                ANL ──→ logs/analysis/ ──→ ORC → [User]
+                ANL ──→ logs/res/analysis/ ──→ ORC → [User]
 ```
 
 ## State Management

@@ -30,10 +30,10 @@ confidence_thresholds:
 # ── Inbox Auto-Approval ──
 inbox_approval:
   auto_approve:
-    RES: ["logs/research/"]
-    DEV: ["shared/decisions/design/", "shared/specs/requirements/"]
-    ARC: ["shared/decisions/architecture/", "shared/specs/interfaces/"]
-    EXD: ["shared/decisions/experiment/"]
+    RES: ["logs/res/research/"]
+    DEV: ["shared/impl/decisions/design/", "shared/impl/specs/requirements/"]
+    ARC: ["shared/impl/decisions/architecture/", "shared/impl/specs/interfaces/"]
+    EXD: ["shared/res/decisions/experiment/"]
     IMP: []
     REV: []
     TST: []

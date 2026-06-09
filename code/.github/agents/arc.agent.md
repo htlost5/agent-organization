@@ -22,9 +22,9 @@ DevPlanner の要件定義に基づき、実装方法を決定する。システ
 - システムアーキテクチャ設計
 - 技術スタックの選定
 - コンポーネント間インターフェース仕様の策定
-- `shared/decisions/architecture/ADR-XXX.md` へのアーキテクチャ決定記録
-- `shared/specs/interfaces/IF-XXX.md` へのインターフェース仕様書作成
-- `logs/architecture/` への設計検討ログ出力
+- `shared/impl/decisions/architecture/ADR-XXX.md` へのアーキテクチャ決定記録
+- `shared/impl/specs/interfaces/IF-XXX.md` へのインターフェース仕様書作成
+- `logs/impl/architecture/` への設計検討ログ出力
 
 ## Out of Scope
 
@@ -34,24 +34,24 @@ DevPlanner の要件定義に基づき、実装方法を決定する。システ
 
 ## Inputs
 
-- DEV からの要件定義書（`shared/specs/requirements/REQ-XXX.md`）
-- DEV からの設計決定（`shared/decisions/design/DD-XXX.md`）
+- DEV からの要件定義書（`shared/impl/specs/requirements/REQ-XXX.md`）
+- DEV からの設計決定（`shared/impl/decisions/design/DD-XXX.md`）
 - プロジェクト共通知識（`shared/context/`）
 
 ## Outputs
 
-- Architecture Decision Record: `shared/decisions/architecture/ADR-XXX.md`
-- Interface Specification: `shared/specs/interfaces/IF-XXX.md`
-- Architecture Log: `logs/architecture/YYYY-MM-DD_ARC_{topic}.md`
+- Architecture Decision Record: `shared/impl/decisions/architecture/ADR-XXX.md`
+- Interface Specification: `shared/impl/specs/interfaces/IF-XXX.md`
+- Architecture Log: `logs/impl/architecture/YYYY-MM-DD_ARC_{topic}.md`
 
 ## Workflow
 
 1. Orchestrator 経由で DEV の要件定義書を受け取る
 2. 要件を読解し、アーキテクチャ方針を検討
 3. 技術スタックを選定し、根拠を明示
-4. アーキテクチャ決定を `shared/decisions/architecture/ADR-XXX.md` に記録
-5. インターフェース仕様を `shared/specs/interfaces/IF-XXX.md` に出力
-6. 設計検討ログを `logs/architecture/` に出力
+4. アーキテクチャ決定を `shared/impl/decisions/architecture/ADR-XXX.md` に記録
+5. インターフェース仕様を `shared/impl/specs/interfaces/IF-XXX.md` に出力
+6. 設計検討ログを `logs/impl/architecture/` に出力
 7. 結果を Orchestrator に返却
 
 ## Decision Rules
@@ -64,7 +64,7 @@ DevPlanner の要件定義に基づき、実装方法を決定する。システ
 
 - 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
 - 書き込みは `_inbox/` 経由で行い、承認後に `shared/` へ移動する
-- 出力は ARC の書き込み権限範囲（`shared/decisions/architecture/`, `shared/specs/interfaces/`, `logs/architecture/`）に限る
+- 出力は ARC の書き込み権限範囲（`shared/impl/decisions/architecture/`, `shared/impl/specs/interfaces/`, `logs/impl/architecture/`）に限る
 
 ## Interactions
 

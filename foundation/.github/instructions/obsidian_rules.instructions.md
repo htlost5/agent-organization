@@ -5,18 +5,18 @@ description: Common rules for all agents
 
 ## 1. 権限まとめ
 
-| エージェント | `_inbox/` | `shared/tasks/` | `shared/decisions/` | `shared/specs/` | `shared/context/` | `logs/`                |
-| ------------ | --------- | --------------- | ------------------- | --------------- | ----------------- | ---------------------- |
-| **ORC**      | ✅        | ✅ 書込         | 読取のみ            | 読取のみ        | ✅ 管理           | —                      |
-| **RES**      | ✅        | 読取のみ        | 読取のみ            | 読取のみ        | 追記可            | `logs/research/`       |
-| **DEV**      | ✅        | 読取のみ        | `design/`           | `requirements/` | 追記可            | `logs/planning/`       |
-| **ARC**      | ✅        | 読取のみ        | `architecture/`     | `interfaces/`   | 追記可            | `logs/architecture/`   |
-| **IMP**      | ✅        | 読取のみ        | 読取のみ            | 読取のみ        | —                 | `logs/implementation/` |
-| **REV**      | ✅        | 読取のみ        | 読取のみ            | 読取のみ        | —                 | `logs/review/`         |
-| **TST**      | ✅        | 読取のみ        | 読取のみ            | 読取のみ        | —                 | `logs/testing/`        |
-| **REL**      | ✅        | 読取のみ        | 読取のみ            | 読取のみ        | —                 | `logs/releases/`       |
-| **EXD**      | ✅        | 読取のみ        | `experiment/`       | —               | 追記可            | `logs/experiments/`    |
-| **ANL**      | ✅        | 読取のみ        | 読取のみ            | 読取のみ        | 追記可            | `logs/analysis/`       |
+| エージェント | `_inbox/` | `shared/tasks/` | `shared/impl/decisions/` | `shared/res/decisions/` | `shared/impl/specs/` | `shared/res/specs/` | `shared/context/` | `logs/impl/` | `logs/res/` |
+| ------------ | --------- | --------------- | ------------------------ | ----------------------- | ------------------- | ------------------ | ----------------- | ------------ | ----------- |
+| **ORC**      | ✅        | ✅ 書込         | 読取のみ                 | 読取のみ                | 読取のみ            | 読取のみ           | ✅ 管理           | —            | —           |
+| **RES**      | ✅        | 読取のみ        | 読取のみ                 | 読取のみ                | 読取のみ            | 読取のみ           | 追記可            | —            | `research/` |
+| **DEV**      | ✅        | 読取のみ        | `design/`                | —                       | `requirements/`    | —                  | 追記可            | `planning/`  | —           |
+| **ARC**      | ✅        | 読取のみ        | `architecture/`          | —                       | `interfaces/`      | —                  | 追記可            | `architecture/` | —         |
+| **IMP**      | ✅        | 読取のみ        | 読取のみ                 | —                       | 読取のみ            | —                  | —                 | `implementation/` | —        |
+| **REV**      | ✅        | 読取のみ        | 読取のみ                 | —                       | 読取のみ            | —                  | —                 | `review/`    | —           |
+| **TST**      | ✅        | 読取のみ        | 読取のみ                 | —                       | 読取のみ            | —                  | —                 | `testing/`   | —           |
+| **REL**      | ✅        | 読取のみ        | 読取のみ                 | —                       | 読取のみ            | —                  | —                 | `releases/`  | —           |
+| **EXD**      | ✅        | 読取のみ        | —                        | `experiment/`           | —                  | —                  | 追記可            | —            | `experiments/` |
+| **ANL**      | ✅        | 読取のみ        | —                        | 読取のみ                | —                  | 読取のみ           | 追記可            | —            | `analysis/` |
 
 ---
 
