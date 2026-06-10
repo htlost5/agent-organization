@@ -6,7 +6,7 @@ description: >
   content, writing requirement specifications, or making design decisions.
   Suitable for DEV (DevPlanner) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: DeepSeek: DeepSeek V4 Pro (openrouter)
 tools: [read, search, web, obsidian/*, vscode/askQuestions]
 agents: []
 ---
@@ -51,7 +51,7 @@ agents: []
 設計のツリーを枝分かれの先まで一つひとつたどり、決定事項間の依存関係を順番に解決していきましょう。
 各質問に対し、あなたの推奨する回答も併せて提示してください。
 
-質問は一度に一つずつお願いします。
+質問はコスト削減のため、一度にまとめてでお願いします。
 
 もしコードベースを探索することで答えが得られる質問であれば、質問する代わりにコードベースを調査してください。
 
