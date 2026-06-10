@@ -9,6 +9,10 @@ description: Define the Local Docs Directory Structure
 
 `RES`: Researcher — foundation
 
+`AGM`: Agent Manager (Architect) — foundation
+
+`AGI`: Agent Implementer — foundation
+
 `DEV`: DevPlanner — code
 
 `ARC`: Architect — code

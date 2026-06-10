@@ -1,20 +1,21 @@
 ---
 name: Orchestrator
-description: Orchestrates sub-agents (RES/DEV/ARC/IMP/REV/TST/REL/EXD/ANL) and controls end-to-end task flow
+description: Orchestrates sub-agents (RES/AGM/AGI/DEV/ARC/IMP/REV/TST/REL/EXD/ANL) and controls end-to-end task flow
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
 tools: [read, search, agent, todo, vscode/askQuestions, web]
 agents:
   [
-    "Researcher",          # foundation（固定）
-    "DevPlanner",          # code（任意配置）
-    "Architect",           # code（任意配置）
-    "Implementer",         # code（任意配置）
-    "Reviewer",            # code（任意配置）
-    "Tester",              # code（任意配置）
-    "Release Manager",     # code（任意配置）
-    "Experiment Designer", # research（任意配置）
-    "Analyst",             # research（任意配置）
+    "Researcher",                 # foundation（固定）
+    "Agent Manager (Architect)",  # foundation（スポット起動）
+    "DevPlanner",                 # code（任意配置）
+    "Architect",                  # code（任意配置）
+    "Implementer",                # code（任意配置）
+    "Reviewer",                   # code（任意配置）
+    "Tester",                     # code（任意配置）
+    "Release Manager",            # code（任意配置）
+    "Experiment Designer",        # research（任意配置）
+    "Analyst",                    # research（任意配置）
   ]
 ---
 
@@ -29,6 +30,8 @@ agents:
 ### 共通（foundation 固定）
 
 - RES(Researcher): ウェブ上の情報を検索する
+- AGM(Agent Manager/Architect): エージェントファイルの設計・レビュー
+- AGI(Agent Implementer): エージェントファイルの実装
 
 ### 実装系（code — 状況に応じて追加）
 

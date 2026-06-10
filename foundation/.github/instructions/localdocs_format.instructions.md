@@ -40,7 +40,7 @@ tags:
 ```
 タグ種別          例
 ─────────────────────────────────────
-エージェント       #ORC #RES #DEV #ARC #IMP #REV #TST #REL #EXD #ANL
+エージェント       #ORC #RES #AGM #AGI #DEV #ARC #IMP #REV #TST #REL #EXD #ANL
 カテゴリ           #task #decision #spec #research #review #test #release #experiment #analysis
 フォルダ系統       #shared #log
 優先度             #priority-high #priority-medium #priority-low

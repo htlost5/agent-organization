@@ -9,7 +9,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 
 本システムは以下の3層マルチルート構成をとる：
 
-- **foundation**（固定）: Orchestrator, Researcher — 常にワークスペースに存在
+- **foundation**（固定）: Orchestrator, Researcher — 常にワークスペースに存在。Agent Manager (Architect), Agent Manager (Implementer) — スポット起動
 - **code**（任意）: DevPlanner, Architect, Implementer, Reviewer, Tester, Release Manager — 実装タスク時に追加
 - **research**（任意）: Experiment Designer, Analyst — 研究タスク時に追加
 
@@ -28,6 +28,8 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 |----|------|------|------|------|
 | ORC | Orchestrator | タスク受付・フロー設計・サブエージェント統制・完了判定 | 司令塔 | foundation |
 | RES | Researcher | 技術調査・情報収集・代替案比較 | 共通 | foundation |
+| AGM | Agent Manager (Architect) | プロジェクト固有エージェント定義の設計・レビュー | 管理系 | foundation |
+| AGI | Agent Manager (Implementer) | プロジェクト固有エージェント定義の実装・配置 | 管理系 | foundation |
 | DEV | DevPlanner | 要件分析・機能仕様決定・設計判断（何を作るか） | 実装系 | code |
 | ARC | Architect | アーキテクチャ設計・技術スタック選定・IF仕様策定（どう作るか） | 実装系 | code |
 | IMP | Implementer | コード実装・デバッグ | 実装系 | code |
