@@ -9,7 +9,7 @@ description: >
   Suitable for ARC (Architect) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, web, obsidian/*]
+tools: [read, search, web]
 agents: []
 ---
 
@@ -64,7 +64,7 @@ DevPlanner の要件定義に基づき、実装方法を決定する。システ
 
 ## Constraints
 
-- 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/projectfa_rules.instructions.md` を参照する
 - 書き込みは `_inbox/` 経由で行い、承認後に `shared/` へ移動する
 - 出力は ARC の書き込み権限範囲（`shared/impl/decisions/architecture/`, `shared/impl/specs/interfaces/`, `logs/impl/architecture/`）に限る
 

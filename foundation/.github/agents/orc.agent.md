@@ -3,7 +3,7 @@ name: Orchestrator
 description: Orchestrates sub-agents (RES/DEV/ARC/IMP/REV/TST/REL/EXD/ANL) and controls end-to-end task flow
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, agent, todo, vscode/askQuestions, web, obsidian/*]
+tools: [read, search, agent, todo, vscode/askQuestions, web]
 agents:
   [
     "Researcher",          # foundation（固定）
@@ -124,7 +124,7 @@ agents:
 
 ## Constraints
 
-- Obsidian マルチエージェント運用の詳細な権限・禁止事項は `.github/instructions/obsidian_rules.instructions.md` を公式ルールとして参照する。
+- Project-FA マルチエージェント運用の詳細な権限・禁止事項は `.github/instructions/projectfa_rules.instructions.md` を公式ルールとして参照する。
 - 必要最小限の出力のみを行い、冗長な説明を避ける（Orchestrator 固有の追加制約は本ファイルで定義する）。
 - 未確定事項はユーザ確認を優先し、推測で確定しない。
 - 進行度ステータスは `not_started / in_progress / blocked / done` を用い、各サブエージェントの完了時と例外発生時に更新する。
@@ -158,20 +158,20 @@ agents:
 ## Exceptions`.github/instructions/handoff_protocol.instructions.md` に定義されたハンドオフフォーマットに従う。
 - チェーン委譲モード時は、サブエージェント間で直接ハンドオフを行う。
 - 通常モード時は、ORC がハンドオフを中継する。
-- ハンドオフでは収まらない詳細情報は Obsidian に記録し、ページのパスを Artifacts に含める
+- ハンドオフでは収まらない詳細情報は Project-FA の shared/ に記録し、ファイルパスを Artifacts に含める
 - サブエージェント失敗時はフォールバックを実行し、進行可能な範囲まで進めて最終報告する。
 - 必要ならユーザに追加情報を要求する。
 - 完全に失敗した内容は、原因と次アクションをまとめて提示する。
 
 ## Tooling / Dependencies
 
-サブエージェント呼び出し、内部メモリ（フロー・状態管理）、必要に応じたネット検索・ObsidianMCP 連携。
+サブエージェント呼び出し、内部メモリ（フロー・状態管理）、必要に応じたネット検索。
 
 ## Interactions
 
 - Orchestrator が指揮・統合し、各サブエージェントは自分の領域の結果のみ返す。
 - サブエージェント間の相互連携は、VS Code Copilot Chat の handsoff 機能で内部自動連携する。
-- handsoff では収まらない詳細指示は Obsidian に記録し、ページのパスを渡す。
+- handsoff では収まらない詳細指示は Project-FA の shared/ に記録し、ファイルパスを渡す。
 - サブエージェントの出力インターフェース（共通必須）
   - `status / key findings or decisions / artifacts (files or links) / open questions / next actions`
   - 役割別の追加項目のみ上乗せし、必要最小限の出力にする。
@@ -213,7 +213,7 @@ ORC ──→ EXD ──→ shared/res/decisions/experiment/EXP-XXX.md
 ## State Management
 
 - 詳細状態は内部メモリに保存し、チャットには進捗と主要決定のみを出す。
-- 共有が必要で保存すべき情報は ObsidianMCP に保存する。
+- 共有が必要で保存すべき情報は Project-FA の shared/ に保存する。
 
 ## Completion Criteria
 

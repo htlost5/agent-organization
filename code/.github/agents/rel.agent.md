@@ -6,7 +6,7 @@ description: >
   or handling version management. Suitable for REL (Release Manager) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, search, execute, obsidian/*]
+tools: [read, search, execute]
 agents: []
 ---
 
@@ -56,7 +56,7 @@ agents: []
 
 ## Constraints
 
-- 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/projectfa_rules.instructions.md` を参照する
 - リリースログは `logs/impl/releases/YYYY-MM-DD_REL_v{version}.md` の命名規則に従う
 
 ## Interactions

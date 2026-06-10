@@ -6,7 +6,7 @@ description: >
   requirements. Suitable for TST (Tester) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, search, execute, obsidian/*]
+tools: [read, search, execute]
 agents: []
 ---
 
@@ -60,7 +60,7 @@ agents: []
 
 ## Constraints
 
-- 権限・禁止事項は foundation の `.github/instructions/obsidian_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/projectfa_rules.instructions.md` を参照する
 - テスト結果は事実ベースで記録し、原因分析は ANL または IMP に委ねる
 
 ## Interactions

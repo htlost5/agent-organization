@@ -40,7 +40,7 @@ status: pending
 category: log
 destination: logs/{from_agent}/
 related:
-  - "[[TASK-{ID}]]"
+  - "[TASK-{ID}](../shared/tasks/active/TASK-{ID}_{title}.md)"
 tags:
   - {from_agent}
   - handoff
@@ -54,7 +54,7 @@ tags:
 |-------|-------|
 | **From** | {from_agent} |
 | **To** | {to_agent} |
-| **Task ID** | [[TASK-{ID}]] |
+| **Task ID** | [TASK-{ID}](../shared/tasks/active/TASK-{ID}_{title}.md) |
 | **Status** | success / partial / failed |
 | **Confidence** | high / medium / low |
 | **Handoff Type** | forward / return / escalate |

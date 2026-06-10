@@ -7,7 +7,7 @@ description: >
   documentation. Suitable for RES (Researcher) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, search, web, obsidian/*]
+tools: [read, search, web]
 agents: []
 ---
 
@@ -64,7 +64,7 @@ agents: []
 
 ## Constraints
 
-- 権限・禁止事項は `.github/instructions/obsidian_rules.instructions.md` を参照する
+- 権限・禁止事項は `.github/instructions/projectfa_rules.instructions.md` を参照する
 - 調査結果の `shared/` への直接書き込みは禁止。必ず `_inbox/` 経由で提案する
 - 調査ログは `logs/research/YYYY-MM-DD_RES_{topic}.md` の命名規則に従う
 
