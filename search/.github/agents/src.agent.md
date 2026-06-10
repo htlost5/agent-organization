@@ -9,9 +9,8 @@ description: >
   a search/investigation task. DO NOT use for: code implementation, design
   decisions, analysis, or any non-search work.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, web, open-websearch, paper-search, github, docs-mcp]
-agents: []
+model: DeepSeek: DeepSeek V4 Flash (openrouter)
+tools: [read, search, web, open-websearch/*, paper-search/*, github/*, docs-mcp/*]
 ---
 
 # Searcher
