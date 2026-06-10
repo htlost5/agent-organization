@@ -7,16 +7,17 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 
 ## 0. マルチルート構成とエージェント配置
 
-本システムは以下の3層マルチルート構成をとる：
+本システムは以下の4層マルチルート構成をとる：
 
-- **foundation**（固定）: Orchestrator, Researcher — 常にワークスペースに存在。Agent Manager (Architect), Agent Manager (Implementer) — スポット起動
+- **foundation**（固定）: Orchestrator — 常にワークスペースに存在。Agent Manager (Architect), Agent Manager (Implementer) — スポット起動
 - **code**（任意）: DevPlanner, Architect, Implementer, Reviewer, Tester, Release Manager — 実装タスク時に追加
 - **research**（任意）: Experiment Designer, Analyst — 研究タスク時に追加
+- **surfing**（任意）: Searcher — 調査タスク時に追加
 
 ### 配置ルール
-- foundation は**常に配置**され、ORC と RES が稼働する
-- code と research は**タスク種別に応じて選択的に追加**する
-- code のみ / research のみ / code + research 同時、いずれも可能
+- foundation は**常に配置**され、ORC が稼働する
+- code, research, surfing は**タスク種別に応じて選択的に追加**する
+- code のみ / research のみ / surfing のみ / 複数ドメイン同時、いずれも可能
 - ORC は利用可能なエージェントを実行時に動的に判定する
 - 利用不可のエージェントにタスクを割り振ろうとした場合、ORC はユーザに不足ドメインの追加を促す
 
@@ -27,7 +28,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 | ID | 名称 | 役割 | 種別 | 所属 |
 |----|------|------|------|------|
 | ORC | Orchestrator | タスク受付・フロー設計・サブエージェント統制・完了判定 | 司令塔 | foundation |
-| RES | Researcher | 技術調査・情報収集・代替案比較 | 共通 | foundation |
+| SRC | Searcher | Web/論文/技術文書の検索・収集（汎用/研究系/技術系の3モード） | 検索系 | surfing |
 | AGM | Agent Manager (Architect) | プロジェクト固有エージェント定義の設計・レビュー | 管理系 | foundation |
 | AGI | Agent Manager (Implementer) | プロジェクト固有エージェント定義の実装・配置 | 管理系 | foundation |
 | DEV | DevPlanner | 要件分析・機能仕様決定・設計判断（何を作るか） | 実装系 | code |
@@ -41,10 +42,11 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 
 ### トポロジー
 - ORC を中心とする**スター型**。全タスクは ORC 経由で発行・返却される。
-- 実装系フロー: `ORC → (RES) → DEV → ARC → IMP → REV → TST → REL → ORC`
-- 研究系フロー: `ORC → (RES) → EXD → ANL → ORC`
+- 実装系フロー: `ORC → DEV → ARC → IMP → REV → TST → REL → ORC`
+- 研究系フロー: `ORC → EXD → ANL → ORC`
+- 検索系フロー: `ORC → SRC → ORC`
 - 差し戻しループ: `REV CRITICAL → IMP`, `TST FAIL → IMP`
-- 各ドメインの詳細フロー・ルールは各フォルダの `copilot-instructions.md` を参照（code は `code/.github/copilot-instructions.md`、research は `research/.github/copilot-instructions.md`）
+- 各ドメインの詳細フロー・ルールは各フォルダの `copilot-instructions.md` を参照（code は `code/.github/copilot-instructions.md`、research は `research/.github/copilot-instructions.md`、surfing は `surfing/.github/copilot-instructions.md`）
 
 ---
 
@@ -87,10 +89,12 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 │   ├── tasks/active/        ← 進行中タスク（ORC 管理）
 │   ├── impl/                ← 実装系共有（decisions/specs）
 │   ├── res/                 ← 研究系共有（decisions/specs）
+│   ├── search/              ← 検索系共有（decisions/specs）
 │   └── context/             ← プロジェクト共通知識（project-meta.md, glossary.md）
 └── logs/
     ├── impl/                ← 実装系ログ（planning/architecture/implementation/review/testing/releases）
-    └── res/                 ← 研究系ログ（research/experiments/analysis）
+    ├── res/                 ← 研究系ログ（research/experiments/analysis）
+    └── search/              ← 検索系ログ（search）
 ```
 
 **最重要ルール**: `_inbox/` をスキップして直接 `shared/` や `logs/` に書き込まないこと。
@@ -111,6 +115,8 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 | 実験設計 (EXD) | `EXP-{ID}_{title}.md` | `EXP-015_benchmark-design.md` |
 | 要件定義 | `REQ-{ID}_{title}.md` | `REQ-042_auth-spec.md` |
 | IF仕様 | `IF-{ID}_{title}.md` | `IF-042_auth-api.md` |
+| 調査方針 (SRC) | `SD-{ID}_{title}.md` | `SD-042_auth-search-plan.md` |
+| 調査結果 (SRC) | `SR-{ID}_{title}.md` | `SR-042_auth-search-results.md` |
 
 ---
 
@@ -120,7 +126,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 
 ```yaml
 ---
-agent: {AgentID}              # 例: RES, ORC, ARC
+agent: {AgentID}              # 例: SRC, ORC, ARC
 task_id: TASK-{ID}            # 紐付けタスクID
 date: YYYY-MM-DD              # 作成日
 status: draft                 # draft | pending | approved | archived

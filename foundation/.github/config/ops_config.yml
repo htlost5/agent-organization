@@ -6,6 +6,11 @@ research:
   extra_search: 2            # 追加検索許容回数
   redo_same_topic: 1        # 同一論点掘り直し回数
 
+search:
+  search_limit: 5            # 基本検索回数
+  extra_search: 3            # 追加検索許容回数（深堀り用）
+  redo_same_topic: 2         # 同一論点掘り直し回数
+
 implementation:
   implementation_attempts: 3 # 実装試行回数
   fix_cycles: 2             # 同一箇所の修正サイクル
@@ -30,7 +35,7 @@ confidence_thresholds:
 # ── Inbox Auto-Approval ──
 inbox_approval:
   auto_approve:
-    RES: ["logs/res/research/"]
+    SRC: ["shared/search/decisions/search/", "shared/search/specs/search-results/", "logs/search/"]
     DEV: ["shared/impl/decisions/design/", "shared/impl/specs/requirements/"]
     ARC: ["shared/impl/decisions/architecture/", "shared/impl/specs/interfaces/"]
     EXD: ["shared/res/decisions/experiment/"]
@@ -48,7 +53,7 @@ flow_shortcuts:
   trivial:
     description: "typo fix, simple config change, one-line patch"
     flow: [IMP, TST, REL]
-    skip: [RES, DEV, ARC, REV]
+    skip: [DEV, ARC, REV]
     # See also: code/.github/copilot-instructions.md
   modification:
     description: "bug fix, code improvement, refactoring, review feedback — no new design required"
@@ -58,31 +63,35 @@ flow_shortcuts:
   simple:
     description: "small utility or feature addition where DEV design is needed but no architecture change"
     flow: [DEV, IMP, REV, TST, REL]
-    skip: [RES, ARC]
+    skip: [ARC]
     # See also: code/.github/copilot-instructions.md
   standard:
     description: "new feature with architecture impact, new technology integration, or system structure change"
-    flow: [RES, DEV, ARC, IMP, REV, TST, REL]
+    flow: [DEV, ARC, IMP, REV, TST, REL]
     skip: []
     # See also: code/.github/copilot-instructions.md
   research:
     description: "research and analysis only, no implementation"
-    flow: [RES, EXD, ANL]
+    flow: [EXD, ANL]
     skip: [DEV, ARC, IMP, REV, TST, REL]
     # See also: research/.github/copilot-instructions.md
+  search:
+    description: "web search, literature survey, technical documentation lookup"
+    flow: [SRC]
+    skip: [DEV, ARC, IMP, REV, TST, REL]
 
 # ── Error Handling ──
 error_handling:
-  # RES
-  res_no_results:
+  # SRC
+  src_no_results:
     max_retries: 2
     retry_strategy: "alternate_keywords"
-    escalation: "ORC redesigns search query"
-    fallback: "estimate from existing knowledge base"
+    escalation: "ORC adjusts search scope or query"
+    fallback: "report best available information with low confidence"
     notify_user: false
-  res_low_confidence:
+  src_low_confidence:
     threshold: "low"
-    action: "return with low confidence flag; ORC decides whether to dig deeper"
+    action: "return with low confidence flag; ORC decides whether to dig deeper or accept"
 
   # DEV
   dev_ambiguous_requirements:
@@ -152,7 +161,7 @@ error_handling:
 
   # ANL
   anl_insufficient_data:
-    action: "identify missing data types; request RES or EXD to collect more"
+    action: "identify missing data types; request SRC or EXD to collect more"
     escalation: "ORC decides whether additional collection is needed"
 
   # Cross-cutting

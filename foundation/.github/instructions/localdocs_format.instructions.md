@@ -11,7 +11,7 @@ description: Rules for All Files Construction
 
 ```
 ---
-agent: {AgentID}              # 例: RES, ORC, ARC
+agent: {AgentID}              # 例: SRC, ORC, ARC
 task_id: TASK-{ID}            # 紐付けタスクID（例: TASK-042）
 date: YYYY-MM-DD              # 作成日
 status: draft                 # draft | pending | approved | archived
@@ -20,7 +20,7 @@ destination: shared/specs/requirements/   # 正式保存先パス
 related:                      # 関連ノートへのリンク（Markdown 相対パス）
   - "[TASK-042_build-auth](../shared/tasks/active/TASK-042_build-auth.md)"
 tags:
-  - {AgentID}                 # エージェントID（例: RES）
+  - {AgentID}                 # エージェントID（例: SRC）
   - {category-tag}            # 内容カテゴリタグ（例: research, architecture）
   - {task_id}                 # タスクIDタグ
 ---
@@ -40,8 +40,8 @@ tags:
 ```
 タグ種別          例
 ─────────────────────────────────────
-エージェント       #ORC #RES #AGM #AGI #DEV #ARC #IMP #REV #TST #REL #EXD #ANL
-カテゴリ           #task #decision #spec #research #review #test #release #experiment #analysis
+エージェント       #ORC #SRC #AGM #AGI #DEV #ARC #IMP #REV #TST #REL #EXD #ANL
+カテゴリ           #task #decision #spec #research #search #review #test #release #experiment #analysis
 フォルダ系統       #shared #log
 優先度             #priority-high #priority-medium #priority-low
 状態               #blocked #in-progress #done

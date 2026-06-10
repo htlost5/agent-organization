@@ -7,7 +7,7 @@ description: Define the Local Docs Directory Structure
 
 `ORC`: Orchestrator — foundation
 
-`RES`: Researcher — foundation
+`SRC`: Searcher — surfing
 
 `AGM`: Agent Manager (Architect) — foundation
 
@@ -62,6 +62,14 @@ description: Define the Local Docs Directory Structure
 │   │       └── interfaces/          # ARC → IMP: インターフェース仕様
 │   │           └── IF-{ID}_{title}.md
 │   │
+│   ├── search/                      # 検索系共有情報（surfing ドメイン）
+│   │   ├── decisions/
+│   │   │   └── search/              # SRC: 調査方針
+│   │   │       └── SD-{ID}_{title}.md
+│   │   └── specs/
+│   │       └── search-results/      # SRC: 調査結果
+│   │           └── SR-{ID}_{title}.md
+│   │
 │   └── res/                         # 研究系共有情報（research ドメイン）
 │       ├── decisions/
 │       │   └── experiment/          # EXD: 実験設計・評価指標
@@ -84,9 +92,12 @@ description: Define the Local Docs Directory Structure
     │   │   └── YYYY-MM-DD_TST_{topic}.md
     │   └── releases/                # REL
     │       └── YYYY-MM-DD_REL_v{version}.md
-    └── res/                         # 研究系ログ
-        ├── research/                # RES
-        │   └── YYYY-MM-DD_RES_{topic}.md
+├── search/                      # 検索系ログ
+    │   └── YYYY-MM-DD_SRC_{topic}.md
+    │
+    ├── res/                         # 研究系ログ
+    │   ├── research/                # SRC
+    │   │   └── YYYY-MM-DD_SRC_{topic}.md
         ├── experiments/             # EXD
         │   └── YYYY-MM-DD_EXD_{topic}.md
         └── analysis/                # ANL

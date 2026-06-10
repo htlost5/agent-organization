@@ -40,6 +40,13 @@ description: Rules for shared task, decision, spec, and context files
 - プロジェクト概要、目標、制約、用語定義を管理する。
 - 更新は Orchestrator の承認を経る。
 
+## shared/search/（surfing ドメイン）
+
+- 検索系（`shared/search/`）:
+  - `decisions/search/`: SRC が調査方針・検索戦略を記録する
+  - `specs/search-results/`: SRC が調査結果サマリを記録する
+- 収集した全情報（URL、サイト名、ダウンロードファイル等）は `logs/search/` に記録する
+
 ## 変更ルール
 
 - 既存ファイルの変更は最小差分で行う。

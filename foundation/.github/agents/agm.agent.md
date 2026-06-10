@@ -7,7 +7,7 @@ description: >
   need to be created or adjusted for the target project. Read-only design
   specialist — does NOT edit files and does NOT write to localdocs. Use when:
   project initialization, agent definition design, customization planning.
-  DO NOT use for: editing core system agents (ORC/RES/DEV/ARC/IMP/REV/TST/REL/EXD/ANL),
+  DO NOT use for: editing core system agents (ORC/SRC/DEV/ARC/IMP/REV/TST/REL/EXD/ANL),
   writing to _inbox/shared/logs, or any file creation.
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)

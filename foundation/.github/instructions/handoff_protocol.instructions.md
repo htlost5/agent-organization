@@ -76,7 +76,7 @@ tags:
 ### Chain History
 | Step | Agent | Status | Summary |
 |------|-------|--------|---------|
-| 1 | RES | done | {要約} |
+| 1 | SRC | done | {要約} |
 | 2 | DEV | done | {要約} |
 | 3 | ARC | in_progress | — |
 
