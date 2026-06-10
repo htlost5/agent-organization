@@ -50,13 +50,18 @@ flow_shortcuts:
     flow: [IMP, TST, REL]
     skip: [RES, DEV, ARC, REV]
     # See also: code/.github/copilot-instructions.md
+  modification:
+    description: "bug fix, code improvement, refactoring, review feedback — no new design required"
+    flow: [IMP, REV, TST, REL]
+    skip: [DEV, ARC]
+    # See also: code/.github/copilot-instructions.md
   simple:
-    description: "add a small utility function, minor feature addition"
+    description: "small utility or feature addition where DEV design is needed but no architecture change"
     flow: [DEV, IMP, REV, TST, REL]
     skip: [RES, ARC]
     # See also: code/.github/copilot-instructions.md
   standard:
-    description: "full implementation flow"
+    description: "new feature with architecture impact, new technology integration, or system structure change"
     flow: [RES, DEV, ARC, IMP, REV, TST, REL]
     skip: []
     # See also: code/.github/copilot-instructions.md

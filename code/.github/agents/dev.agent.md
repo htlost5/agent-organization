@@ -2,8 +2,10 @@
 name: DevPlanner
 description: >
   Decide what to build — define feature specifications, design decisions,
-  and requirements. Use when: planning new features, determining implementation
-  content, writing requirement specifications, or making design decisions.
+  and requirements. Use ONLY when: planning NEW features, making significant
+  spec changes, or when requirements are ambiguous and need design decisions.
+  DO NOT use for: bug fixes, refactoring, code reviews, minor improvements,
+  or tasks where implementation path is already clear.
   Suitable for DEV (DevPlanner) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
@@ -91,6 +93,7 @@ agents: []
 - RES の調査結果は Orchestrator 経由で受け取る
 
 ## Domain
+
 このエージェントは **code**（実装系）ドメインに属します。
 起動と統制は foundation の Orchestrator が行います。
 

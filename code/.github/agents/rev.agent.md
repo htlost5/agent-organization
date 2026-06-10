@@ -5,7 +5,7 @@ description: >
   requests, checking code quality, performing security audits, or validating
   implementations against specifications. Suitable for REV (Reviewer) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
+model: DeepSeek: DeepSeek V4 Flash (openrouter)
 tools: [read, search, obsidian/*]
 agents: []
 ---

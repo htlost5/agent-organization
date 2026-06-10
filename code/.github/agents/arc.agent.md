@@ -2,12 +2,14 @@
 name: Architect
 description: >
   Decide how to build — define architecture, technology stack, and interface
-  specifications. Use when: designing system architecture, selecting technology
-  stacks, defining interfaces between components, or writing ADR documents.
+  specifications. Use ONLY when: introducing new technologies/libraries/frameworks,
+  changing system structure, adding new component interfaces, or making architectural
+  decisions that impact the codebase structure. DO NOT use for: routine feature
+  implementation within existing architecture, bug fixes, refactoring, or minor improvements.
   Suitable for ARC (Architect) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, obsidian/*]
+tools: [read, search, web, obsidian/*]
 agents: []
 ---
 
@@ -73,6 +75,7 @@ DevPlanner の要件定義に基づき、実装方法を決定する。システ
 - DEV の成果物は Orchestrator 経由で受け取る
 
 ## Domain
+
 このエージェントは **code**（実装系）ドメインに属します。
 起動と統制は foundation の Orchestrator が行います。
 
