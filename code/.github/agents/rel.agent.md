@@ -56,7 +56,7 @@ agents: []
 
 ## Constraints
 
-- 権限・禁止事項は foundation の `.github/instructions/projectfa_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/localdocs_rules.instructions.md` を参照する
 - リリースログは `logs/impl/releases/YYYY-MM-DD_REL_v{version}.md` の命名規則に従う
 
 ## Interactions

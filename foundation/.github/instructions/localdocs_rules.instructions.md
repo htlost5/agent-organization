@@ -1,5 +1,5 @@
 ---
-name: Project-FA Common Rules
+name: Local Docs Common Rules
 description: Common rules for all agents
 ---
 
@@ -37,4 +37,4 @@ description: Common rules for all agents
 ## 3. 命名規則
 
 - `_inbox/` 内のファイル名は `YYYY-MM-DD_HHMM_{AgentID}_{slug}.md` に従う。
-  詳細は [projectfa_structure.instructions.md](projectfa_structure.instructions.md) を参照。
+  詳細は [localdocs_structure.instructions.md](localdocs_structure.instructions.md) を参照。

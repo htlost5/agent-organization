@@ -1,6 +1,6 @@
 ---
-name: Project-FA Structure Rules
-description: Define the Project-FA Directory Structure
+name: Local Docs Structure Rules
+description: Define the Local Docs Directory Structure
 ---
 
 ## 1. エージェント一覧
@@ -30,7 +30,7 @@ description: Define the Project-FA Directory Structure
 ## 2. ディレクトリ構造
 
 ```
-Project-FA/
+{project_name}/
 │
 ├── _inbox/                          # 全エージェント必須の一時書き込み場所
 │   └── YYYY-MM-DD_HHMM_{ID}_{slug}.md
@@ -93,4 +93,4 @@ Project-FA/
 
 ## 3. 参照
 
-- 権限まとめと禁止事項は [projectfa_rules.instructions.md](projectfa_rules.instructions.md) を参照。
+- 権限まとめと禁止事項は [localdocs_rules.instructions.md](localdocs_rules.instructions.md) を参照。

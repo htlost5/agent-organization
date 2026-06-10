@@ -1,5 +1,5 @@
 ---
-name: Project-FA Format Rules
+name: Local Docs Format Rules
 description: Rules for All Files Construction
 ---
 
@@ -50,7 +50,7 @@ tags:
 ### 3.4 命名規則
 
 - `_inbox/` 内のファイル名は `YYYY-MM-DD_HHMM_{AgentID}_{slug}.md` に従う。
-  詳細は [projectfa_structure.instructions.md](projectfa_structure.instructions.md) を参照。
+  詳細は [localdocs_structure.instructions.md](localdocs_structure.instructions.md) を参照。
 
 ### 3.5 品質チェックリスト（文書レビュー初期ゲート）
 

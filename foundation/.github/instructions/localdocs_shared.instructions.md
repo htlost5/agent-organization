@@ -1,5 +1,5 @@
 ---
-name: Project-FA Shared Folder Rules
+name: Local Docs Shared Folder Rules
 description: Rules for shared task, decision, spec, and context files
 ---
 
@@ -48,4 +48,4 @@ description: Rules for shared task, decision, spec, and context files
 
 ## 禁止事項
 
-共通の禁止事項は [projectfa_rules.instructions.md](projectfa_rules.instructions.md) を参照。
+共通の禁止事項は [localdocs_rules.instructions.md](localdocs_rules.instructions.md) を参照。

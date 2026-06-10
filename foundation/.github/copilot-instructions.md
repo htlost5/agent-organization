@@ -1,7 +1,7 @@
 # Multi-Agent Development System — Common Rules
 
 このファイルは全エージェントに共通適用される基本ルールを定義します。
-Project-FA ディレクトリ構造・権限マトリクス・ファイル命名規則の詳細は `.github/instructions/` 配下の各指示書を参照してください。
+Local Docs ディレクトリ構造・権限マトリクス・ファイル命名規則の詳細は `.github/instructions/` 配下の各指示書を参照してください。
 
 ---
 
@@ -76,10 +76,10 @@ Project-FA ディレクトリ構造・権限マトリクス・ファイル命名
 
 ---
 
-## 3. Project-FA ディレクトリ構造（簡略リファレンス）
+## 3. Local Docs ディレクトリ構造（簡略リファレンス）
 
 ```
-Project-FA/
+{project_name}/
 ├── _inbox/                  ← 全エージェントの一時書き込み場所（必須経由）
 ├── shared/
 │   ├── tasks/active/        ← 進行中タスク（ORC 管理）
@@ -93,7 +93,7 @@ Project-FA/
 
 **最重要ルール**: `_inbox/` をスキップして直接 `shared/` や `logs/` に書き込まないこと。
 
-詳細な権限マトリクス・禁止事項は `.github/instructions/projectfa_rules.instructions.md` を参照。
+詳細な権限マトリクス・禁止事項は `.github/instructions/localdocs_rules.instructions.md` を参照。
 
 ---
 
@@ -124,7 +124,7 @@ date: YYYY-MM-DD              # 作成日
 status: draft                 # draft | pending | approved | archived
 category: shared | log        # 共有情報か作業ログか
 destination: shared/impl/specs/requirements/  # 正式保存先パス
-related:                      # 関連ノートへの Project-FA 内部リンク
+related:                      # 関連ノートへの local docs 内部リンク
   - "[TASK-042_build-auth](../shared/tasks/active/TASK-042_build-auth.md)"
 tags:
   - {AgentID}

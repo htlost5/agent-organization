@@ -74,7 +74,7 @@ agents: []
 
 ## Constraints
 
-- 権限・禁止事項は foundation の `.github/instructions/projectfa_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/localdocs_rules.instructions.md` を参照する
 - 書き込みは `_inbox/` 経由で行い、承認後に `shared/` へ移動する
 - 出力は EXD の書き込み権限範囲（`shared/res/decisions/experiment/`, `logs/res/experiments/`）に限る
 
