@@ -3,7 +3,7 @@ name: Orchestrator
 description: Orchestrates sub-agents (SRC/AGM/AGI/DEV/ARC/IMP/REV/TST/REL/EXD/ANL) and controls end-to-end task flow
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, agent, todo, vscode/askQuestions, web]
+tools: [vscode/askQuestions, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/readNotebookCellOutput, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/runSubagent, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/searchSubagent, search/usages, web/fetch, web/githubRepo, web/githubTextSearch, open-websearch/search, todo]
 agents:
   [
     "Searcher",                 # surfing（任意配置）
