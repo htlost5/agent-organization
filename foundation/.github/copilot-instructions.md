@@ -83,7 +83,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 ## 3. Local Docs ディレクトリ構造（簡略リファレンス）
 
 ```
-{project_name}/
+docs/
 ├── _inbox/                  ← 全エージェントの一時書き込み場所（必須経由）
 ├── shared/
 │   ├── tasks/active/        ← 進行中タスク（ORC 管理）

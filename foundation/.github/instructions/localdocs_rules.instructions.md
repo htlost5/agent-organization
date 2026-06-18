@@ -36,6 +36,8 @@ description: Common rules for all agents
 
 6. `shared/context/project-meta.md` と `glossary.md` の更新は必ず Orchestrator の承認を経ること
 
+7. `docs/` が存在しない場合は、書き込み前に **必ず** `docs/` と必要なサブディレクトリを自動作成すること（[localdocs_structure.instructions.md](localdocs_structure.instructions.md) 4章 参照）
+
 ## 3. 命名規則
 
 - `_inbox/` 内のファイル名は `YYYY-MM-DD_HHMM_{AgentID}_{slug}.md` に従う。

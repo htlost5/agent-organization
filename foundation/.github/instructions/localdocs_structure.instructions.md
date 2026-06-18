@@ -34,7 +34,7 @@ description: Define the Local Docs Directory Structure
 ## 2. ディレクトリ構造
 
 ```
-{project_name}/
+docs/
 │
 ├── _inbox/                          # 全エージェント必須の一時書き込み場所
 │   └── YYYY-MM-DD_HHMM_{ID}_{slug}.md
@@ -109,3 +109,34 @@ description: Define the Local Docs Directory Structure
 ## 3. 参照
 
 - 権限まとめと禁止事項は [localdocs_rules.instructions.md](localdocs_rules.instructions.md) を参照。
+
+---
+
+## 4. docs/ ディレクトリ自動作成ルール
+
+- 全エージェントはローカルドキュメントを保存する前に、対象プロジェクトのルートディレクトリ直下に `docs/` が存在するか確認する
+- `docs/` が存在しない場合、以下のディレクトリを自動作成する:
+  - `docs/_inbox/`
+  - `docs/shared/tasks/active/`
+  - `docs/shared/tasks/archive/`
+  - `docs/shared/context/`
+  - `docs/shared/impl/decisions/design/`
+  - `docs/shared/impl/decisions/architecture/`
+  - `docs/shared/impl/specs/requirements/`
+  - `docs/shared/impl/specs/interfaces/`
+  - `docs/shared/search/decisions/search/`
+  - `docs/shared/search/specs/search-results/`
+  - `docs/shared/res/decisions/experiment/`
+  - `docs/shared/res/specs/experiment-results/`
+  - `docs/logs/impl/planning/`
+  - `docs/logs/impl/architecture/`
+  - `docs/logs/impl/implementation/`
+  - `docs/logs/impl/review/`
+  - `docs/logs/impl/testing/`
+  - `docs/logs/impl/releases/`
+  - `docs/logs/search/`
+  - `docs/logs/res/research/`
+  - `docs/logs/res/experiments/`
+  - `docs/logs/res/analysis/`
+- `docs/` が既に存在する場合はそのまま使用する
+- 自動作成処理は各エージェントの初回書き込み時に一度だけ実行する

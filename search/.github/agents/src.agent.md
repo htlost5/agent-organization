@@ -10,9 +10,9 @@ description: >
   handoff with status, findings, artifacts, open questions. Use when: ORC
   delegates a search/investigation task. DO NOT use for: code implementation,
   design decisions, analysis, or any non-search work.
-user-invocable: false
+user-invocable: true
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, search, web, open-websearch/*, paper-search/*, github/*, docs-mcp/*]
+tools: [read, edit, web, open-websearch/*, paper-search/*, github/*, docs-mcp/*]
 ---
 
 # Searcher
