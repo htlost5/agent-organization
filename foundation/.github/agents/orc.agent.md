@@ -3,7 +3,7 @@ name: Orchestrator
 description: Orchestrates sub-agents (SRC/AGM/AGI/DEV/ARC/IMP/REV/TST/REL/EXD/ANL) and controls end-to-end task flow
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [vscode/askQuestions, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/readNotebookCellOutput, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/runSubagent, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/searchSubagent, search/usages, web/fetch, web/githubRepo, web/githubTextSearch, open-websearch/search, todo]
+tools: [agent, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/readNotebookCellOutput, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/runSubagent, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/usages, web/fetch, web/githubRepo, web/githubTextSearch, open-websearch/search, todo]
 agents:
   [
     "Searcher",                 # surfing（任意配置）
@@ -98,13 +98,13 @@ agents:
   1. 新機能の設計が新たに必要
   2. 既存機能の大幅な仕様変更
   3. 要件の不確定要素が多く、設計判断が必要
-  → バグ修正・軽微な改善・コードレビュー・リファクタリングでは DEV を**スキップ**する
+     → バグ修正・軽微な改善・コードレビュー・リファクタリングでは DEV を**スキップ**する
 
 - ARC 呼び出し条件（以下のいずれかに該当する場合のみ起動）:
   1. 新技術・新ライブラリ・新フレームワークの導入
   2. コンポーネント間インターフェースの新設・変更
   3. システム構造の変更（新モジュール追加・アーキテクチャパターン変更）
-  → 既存構造内での実装・修正では ARC を**スキップ**する
+     → 既存構造内での実装・修正では ARC を**スキップ**する
 
 - 実装設計の意思決定が必要なタスクは DevPlanner、実験条件・評価指標の設計が主目的なら ExperimentDesigner に振る。
 - 実験と研究の要素が混在する場合は、どちらを先に定めるべきか判断して順に振る。判断不能ならユーザに確認する。
@@ -163,6 +163,7 @@ agents:
   - 予算上限に達した
 
 ## Exceptions`.github/instructions/handoff_protocol.instructions.md` に定義されたハンドオフフォーマットに従う。
+
 - チェーン委譲モード時は、サブエージェント間で直接ハンドオフを行う。
 - 通常モード時は、ORC がハンドオフを中継する。
 - ハンドオフでは収まらない詳細情報は local docs の shared/ に記録し、ファイルパスを Artifacts に含める
