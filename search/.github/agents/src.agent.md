@@ -198,3 +198,11 @@ ORC 返却前に以下の6項目を自己検証する。1項目でも不合格�
 
 このエージェントは **surfing**（検索）ドメインに属します。
 ORC の調査依頼時のみ起動されるサブエージェントです。
+
+## Context Minimization（トークン節約）
+
+- 読取前に必ず `shared/context/project-index.md` を参照し、検索に関連する既存調査結果を把握すること
+- ファイル読み取り時は必ず行範囲（`startLine`/`endLine`）を指定し、必要最小限の範囲に絞ること
+- 全文読み取りは `context_minimization.instructions.md` の例外条件に該当する場合のみ許可する
+- 検索結果の `SR-{ID}.md` には、キーワード索引を付録として添付し、後続タスクでの再利用性を高めること
+- 調査完了時、新たに発見した重要ソース・ドメイン知識は `_inbox/` 経由で `search/project-index.md` への追記を提案する

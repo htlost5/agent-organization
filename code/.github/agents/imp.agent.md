@@ -75,7 +75,9 @@ Architect のインターフェース仕様に基づき、コード実装とデ�
 
 ## Context Minimization（トークン節約）
 
+- 読取前に必ず `shared/context/project-index.md` および `code/project-index.md` を参照し、実装対象ファイルを特定すること
+- 未知のコードベースを探索する場合は、まず `grep_search` または `file_search` で関連箇所を特定すること
 - ファイル読み取り時は必ず行範囲（`startLine`/`endLine`）を指定し、必要最小限の範囲に絞ること
-- 未知のコードベースを探索する場合は、まず `search/textSearch` または `search/fileSearch` で関連箇所を特定すること
-- 全ファイル読み取り（行指定なしの `read_file`）は、その必要性を明確に説明できる場合のみ許可する
+- 全文読み取りは `context_minimization.instructions.md` の例外条件に該当する場合のみ許可する
 - ORC から `Input Context` で指定されたファイル以外の読み取りは、明示的な必要性がある場合のみ行う
+- 実装中に発見した未索引の重要ファイル・フォルダは、`_inbox/` 経由で `code/project-index.md` への追記を提案する
