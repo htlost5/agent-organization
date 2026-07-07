@@ -52,7 +52,7 @@ agents:
 - IMP (Implementer): コード実装、デバッグ
 - REV (Reviewer): コードレビュー、セキュリティチェック
 - TST (Tester): 実装物のテスト
-- REL (Release Manager): git管理、アプリビルド
+- REL (Release Manager): git管理、アプリビルド、文書成果物のバージョン管理
 
 ### 研究系（research — 状況に応じて追加）
 
@@ -125,7 +125,7 @@ agents:
 - **研究**: 実験設計/分析
 - **調査**: 情報収集・検索
 - **統合**: 複数成果物の整合、研究結果の実装への利用や関連実装の接続
-- **文書生成**: 設計書・仕様書・知識ベース文書の作成（フロー: `ORC → DWR → ORC`）
+- **文書生成**: 設計書・仕様書・知識ベース文書の作成（フロー: `ORC → DWR → ORC → (REL) → ORC`）
 - **Agent Customization**: agent.md / instructions / prompt / skill / AGENTS / copilot-instructions の設計・実装
 - **Agent Team Design**: 新規エージェントチームの構成設計、責務分割、ハンドオフ設計、共通ルール設計
 
@@ -173,6 +173,17 @@ agents:
   1. ユーザに「${domain} フォルダをワークスペースに追加してください」と通知
   2. 追加されるまでタスクを保留（blocked 状態）
   3. 単純な調査のみで完結できる場合は SRC で代替提案する
+
+### 文書生成タスクにおける REL 呼び出し条件
+
+DWR 完了後、以下の**いずれか**に該当する場合に限り REL を起動し、文書成果物の git 管理を行う:
+
+1. ユーザが明示的に「コミットして」「git管理して」などと依頼した場合
+2. 出力先が git 管理リポジトリ内であり、ORC がバージョン管理すべきと判断した場合
+3. 文書成果物に対してバージョン番号（タグ）の付与が必要な場合
+
+上記いずれにも該当しない場合、REL は起動せず DWR の成果物をそのままユーザに返却する。
+REL 起動時は ORC 中継（DWR→ORC→REL→ORC）で行い、直接ハンドオフは使用しない。
 
 ### チェーン委譲モード
 
@@ -293,6 +304,14 @@ TST ──→ logs/impl/testing/                                  │
 │      (リリース承認)                                      │
 ↓                                                          │
 REL ──→ logs/impl/releases/ ───────────────────────────────┘
+
+【文書生成フロー】
+ORC ──→ DWR ──→ ORC ──→ (REL) ──→ ORC
+│                         │
+│      _inbox/            │      logs/impl/releases/
+│      shared/            │      (git管理)
+│                         │
+└─ REL 起動条件を満たさない場合は REL をスキップ ──┘
 
 【Agent Customization フロー】
 ORC ──→ AGM ──→ shared/agent-design/decisions/AGD-XXX.md

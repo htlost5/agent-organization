@@ -80,6 +80,13 @@ flow_shortcuts:
     flow: [SRC]
     skip: [DEV, ARC, IMP, REV, TST, REL]
 
+  document:
+    description: "structured document generation (design docs, specs, knowledge base)"
+    flow: [DWR]
+    skip: [DEV, ARC, IMP, REV, TST]
+    optional: [REL]
+    note: "REL is invoked when any of: user requests commit, git-managed output, or version tagging needed"
+
 # ── Error Handling ──
 error_handling:
   # SRC
