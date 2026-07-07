@@ -5,7 +5,7 @@ description: >
   controls end-to-end task flow for existing projects and agent-management tasks.
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [agent, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/readNotebookCellOutput, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/runSubagent, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/usages, web/fetch, web/githubRepo, web/githubTextSearch, open-websearch/search, todo]
+tools: [vscode/askQuestions, read, agent, search, web, open-websearch/search, todo]
 agents:
   [
     "Searcher",                   # surfing（任意配置）

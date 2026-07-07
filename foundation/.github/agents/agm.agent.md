@@ -13,7 +13,7 @@ description: >
   writing to _inbox/shared/logs, or any file creation.
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, web, vscode/askQuestions, todo, agent]
+tools: [vscode/askQuestions, read, agent, search, web, open-websearch/search, todo]
 agents: ["Agent Manager (Implementer)"]
 ---
 

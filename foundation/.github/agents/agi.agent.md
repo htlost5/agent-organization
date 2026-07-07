@@ -10,9 +10,9 @@ description: >
   (_inbox/shared/logs). Use when: implementing approved agent customization
   designs. DO NOT use for: editing core system agents, writing to localdocs,
   or independent design work.
-user-invocable: false
+user-invocable: true
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, search, edit]
+tools: [read, edit, search, open-websearch/search, todo]
 agents: []
 ---
 
