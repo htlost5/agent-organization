@@ -31,6 +31,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 | SRC | Searcher | Web/論文/技術文書の検索・収集（汎用/研究系/技術系の3モード） | 検索系 | surfing |
 | AGM | Agent Manager (Architect) | プロジェクト固有エージェント定義の設計・レビュー | 管理系 | foundation |
 | AGI | Agent Manager (Implementer) | プロジェクト固有エージェント定義の実装・配置 | 管理系 | foundation |
+| DWR | Document Writer | ORC/他エージェントの成果物から設計書・仕様書・知識ベース文書を生成 | 文書生成系 | foundation |
 | DEV | DevPlanner | 要件分析・機能仕様決定・設計判断（何を作るか） | 実装系 | code |
 | ARC | Architect | アーキテクチャ設計・技術スタック選定・IF仕様策定（どう作るか） | 実装系 | code |
 | IMP | Implementer | コード実装・デバッグ | 実装系 | code |
