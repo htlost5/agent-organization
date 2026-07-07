@@ -5,7 +5,7 @@ description: >
   controls end-to-end task flow for existing projects and agent-management tasks.
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [vscode/askQuestions, read, agent, search, web, open-websearch/search, todo]
+tools: [vscode/askQuestions, execute, read, agent, search, web, open-websearch/search, todo]
 agents:
   [
     "Searcher",                   # surfing（任意配置）
@@ -197,6 +197,7 @@ agents:
 - local docs マルチエージェント運用の詳細な権限・禁止事項は `.github/instructions/localdocs_rules.instructions.md` を公式ルールとして参照する。
 - 必要最小限の出力のみを行い、冗長な説明を避ける（Orchestrator 固有の追加制約は本ファイルで定義する）。
 - 未確定事項はユーザ確認を優先し、推測で確定しない。
+- 不明瞭点の確認や実行可否の判断をユーザに仰ぐ必要がある場合は、必ず `vscode-askQuestions` を利用し、途中でセッションを中断せずにそのまま進行する。
 - 進行度ステータスは `not_started / in_progress / blocked / done` を用い、各サブエージェントの完了時と例外発生時に更新する。
 - サブエージェント起動時に `project-index.md` の関連セクションを `Input Context` として注入する
 - タスク完了時、インデックス更新の要否を判定し、必要に応じて `shared/context/project-index.md` および該当ドメインのインデックスを更新する
@@ -264,44 +265,46 @@ agents:
 ## 情報フロー図
 
 ```
+
 [User] ──→ ORC ─────────────────────────────────────────────────────→ [User]
-             │                                                          ↑
-             │ shared/tasks/active/TASK-XXX.md                         │
-             ↓                                                          │
-            SRC ──→ logs/search/                                         │
-             │      └─ (key findings)→ shared/context/                 │
-             ↓                                                          │
-            DEV ──→ shared/impl/decisions/design/DD-XXX.md             │
-             │      shared/impl/specs/requirements/REQ-XXX.md          │
-             ↓                                                          │
-            ARC ──→ shared/impl/decisions/architecture/ADR-XXX.md      │
-             │      shared/impl/specs/interfaces/IF-XXX.md             │
-             ↓                                                          │
-            IMP ──→ logs/impl/implementation/                          │
-             │    ←─ (差し戻し) ─────────────────────────────────┐     │
-             ↓                                                    │     │
-            REV ──→ logs/impl/review/ ───────────────── CRITICAL →┘     │
-             │      (Conditional Approval)                             │
-             ↓                                                          │
-            TST ──→ logs/impl/testing/                                  │
-             │      (リリース承認)                                      │
-             ↓                                                          │
-            REL ──→ logs/impl/releases/ ───────────────────────────────┘
+│                                                          ↑
+│ shared/tasks/active/TASK-XXX.md                         │
+↓                                                          │
+SRC ──→ logs/search/                                         │
+│      └─ (key findings)→ shared/context/                 │
+↓                                                          │
+DEV ──→ shared/impl/decisions/design/DD-XXX.md             │
+│      shared/impl/specs/requirements/REQ-XXX.md          │
+↓                                                          │
+ARC ──→ shared/impl/decisions/architecture/ADR-XXX.md      │
+│      shared/impl/specs/interfaces/IF-XXX.md             │
+↓                                                          │
+IMP ──→ logs/impl/implementation/                          │
+│    ←─ (差し戻し) ─────────────────────────────────┐     │
+↓                                                    │     │
+REV ──→ logs/impl/review/ ───────────────── CRITICAL →┘     │
+│      (Conditional Approval)                             │
+↓                                                          │
+TST ──→ logs/impl/testing/                                  │
+│      (リリース承認)                                      │
+↓                                                          │
+REL ──→ logs/impl/releases/ ───────────────────────────────┘
 
 【Agent Customization フロー】
 ORC ──→ AGM ──→ shared/agent-design/decisions/AGD-XXX.md
-              │      shared/agent-design/specs/AGS-XXX.md
-              ↓
-              AGI ──→ logs/agent-customization/implementation/
-                    ←─ (差し戻し) ────────────────────────────────┐
-              ↓                                                  │
-              ORC ───────────────────────────────────────────────┘
+│      shared/agent-design/specs/AGS-XXX.md
+↓
+AGI ──→ logs/agent-customization/implementation/
+←─ (差し戻し) ────────────────────────────────┐
+↓                                                  │
+ORC ───────────────────────────────────────────────┘
 
 【研究系フロー】
 ORC ──→ EXD ──→ shared/res/decisions/experiment/EXP-XXX.md
-                logs/res/experiments/
-                    ↓
-                ANL ──→ logs/res/analysis/ ──→ ORC → [User]
+logs/res/experiments/
+↓
+ANL ──→ logs/res/analysis/ ──→ ORC → [User]
+
 ```
 
 ## State Management
