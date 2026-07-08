@@ -11,7 +11,9 @@ description: Define the Local Docs Directory Structure
 
 `AGM`: Agent Manager (Architect) — foundation
 
-`AGI`: Agent Implementer — foundation
+`AGI`: Agent Manager (Implementer) — foundation
+
+`DWR`: Document Writer — foundation
 
 `DEV`: DevPlanner — code
 

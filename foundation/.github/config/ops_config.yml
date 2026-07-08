@@ -87,6 +87,19 @@ flow_shortcuts:
     optional: [REL]
     note: "REL is invoked when any of: user requests commit, git-managed output, or version tagging needed"
 
+# ── Versioning ──
+versioning:
+  strategy: "conventional-commits"
+  tool: "standard-version"
+  auto_bump_rules:
+    feat: "minor"
+    fix: "patch"
+    BREAKING_CHANGE: "major"
+  changelog: true
+  tag_prefix: "v"
+  pre_release_suffix: ""
+  dry_run_first: true
+
 # ── Error Handling ──
 error_handling:
   # SRC
@@ -160,6 +173,15 @@ error_handling:
   rel_merge_conflict:
     action: "request IMP to resolve via ORC"
     notify_user: false
+  rel_version_bump_failure:
+    max_retries: 1
+    action: "rollback (git reset --hard HEAD~1, delete tag), report error log to ORC"
+    escalation: "ORC decides: manual version override or retry"
+  rel_push_failure:
+    max_retries: 2
+    action: "git pull --rebase then retry push"
+    escalation_after: 2
+    escalation: "request IMP to resolve conflict via ORC"
 
   # EXD
   exd_unmeasurable:

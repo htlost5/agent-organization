@@ -18,7 +18,7 @@
 | **trivial**      | `IMP → TST → REL`                         | タイポ修正・単純設定変更・1行パッチ                    |
 | **modification** | `IMP → REV → TST → REL`                   | バグ修正・リファクタリング・コード改善（設計変更不要） |
 | **simple**       | `DEV → IMP → REV → TST → REL`             | 小規模機能追加（新設計必要、アーキテクチャ変更不要）   |
-| **standard**     | `RES → DEV → ARC → IMP → REV → TST → REL` | 新技術導入・システム構造変更・大規模新機能             |
+| **standard**     | `DEV → ARC → IMP → REV → TST → REL` | 新技術導入・システム構造変更・大規模新機能             |
 
 ---
 

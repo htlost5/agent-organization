@@ -20,8 +20,10 @@ agents: []
 ## Scope
 
 - git コミット・ブランチ管理
+- セマンティックバージョニング（standard-version による自動バンプ）
 - アプリケーションビルド
-- リリース作成・バージョン管理
+- CHANGELOG 管理
+- git タグ作成・管理
 - `logs/impl/releases/` へのリリースログ出力
 - DWR 生成文書の git ステージング・コミット・タグ付け
 
@@ -30,39 +32,197 @@ agents: []
 - コード修正・マージコンフリクト解決（IMP に委譲）
 - テスト実行（TST に委譲）
 - 設計判断（DEV/ARC に委譲）
+- バージョン番号の独自判定（standard-version の自動判定に従う。例外時のみ ORC 指示に従う）
+- リモートへの git push（ORC の明示的指示があった場合のみ実行）
 
 ## Inputs
 
 - TST 合格済みの実装コード
 - DWR 生成文書のパス（Orchestrator から指示）
-- リリースバージョン番号（Orchestrator から指示）
+- リリースバージョン指示（Orchestrator から。省略可）
 
 ## Outputs
 
-- コミット・プッシュ完了（実装成果物）: `logs/impl/releases/YYYY-MM-DD_REL_v{version}.md`
-- Release Log（文書成果物）: `logs/impl/releases/YYYY-MM-DD_REL_doc-{slug
-- ビルド成果物
 - Release Log: `logs/impl/releases/YYYY-MM-DD_REL_v{version}.md`
+- コミット + タグ付き git history
+- ビルド成果物（該当する場合）
+
+---
 
 ## Workflow
 
-1. Orchestrator 経由で TST 合格済みの実装成果物を受け取る
-2. 変更を git ステージング・コミット
-3. アプリケーションをビルド
-4. バージョンタグを付与
-5. リリースログを `logs/impl/releases/` に出力
-6. 結果を Orchestrator に返却
+### Step 1: バージョン番号の決定
+
+1. **ORC から明示的なバージョン指示がある場合** → そのバージョンを使用する
+2. **ORC から指示がない場合** → `npx standard-version --dry-run` を実行し、自動判定されたバージョンを採用する
+3. バージョン番号を決定したら、ORC に確認する（`vscode/askQuestions` で「バージョン X.Y.Z でリリースします。よろしいですか？」と確認）
+
+**standard-version の自動バンプルール**（`ops_config.yml` の `versioning.auto_bump_rules` 参照）:
+| コミットプレフィックス | バンプ種別 |
+|---|---|
+| `feat:` | minor |
+| `fix:` | patch |
+| `BREAKING CHANGE:` | major |
+| その他 (`chore:`, `docs:`, `style:`, `refactor:`, `test:`) | バンプなし（CHANGELOG のみ更新） |
+
+### Step 2: 事前状態確認
+
+```bash
+# 未コミット変更の有無を確認
+git status --porcelain
+
+# 現在のバージョンと最終タグを確認
+git describe --tags --abbrev=0 2>/dev/null || echo "no tags yet"
+```
+
+- 未コミット変更がある場合は、IMP に差し戻すか、ユーザに確認する
+
+### Step 3: バージョンバンプ実行
+
+**初回リリース（タグが存在しない）場合**:
+```bash
+npx standard-version --release-as <major|minor|patch> --first-release
+```
+
+**通常リリース（既存タグあり）場合**:
+```bash
+npx standard-version --release-as <major|minor|patch>
+```
+
+**`--skip` オプションの使い分け**:
+| オプション | 用途 | 使用条件 |
+|---|---|---|
+| `--skip.bump` | バージョン番号更新をスキップ | ORC が手動で version を設定済みの場合 |
+| `--skip.changelog` | CHANGELOG 更新をスキップ | 文書タスクなど CHANGELOG 不要な場合 |
+| `--skip.commit` | 自動コミットをスキップ | 手動コミット後に手動タグ付けする場合（非推奨） |
+| `--skip.tag` | タグ作成をスキップ | タグを後から手動で付与する場合（非推奨） |
+
+**注意**: `standard-version` は以下の処理を**自動実行**する:
+- `package.json` の `version` フィールドを更新
+- `CHANGELOG.md` を更新（なければ新規作成）
+- 変更を git commit（メッセージ: `chore(release): X.Y.Z`）
+- git tag を作成（`vX.Y.Z`）
+
+### Step 4: 成果物検証
+
+```bash
+# package.json のバージョンが更新されたか確認
+node -e "console.log(require('./package.json').version)"
+
+# CHANGELOG.md が生成/更新されたか確認
+head -30 CHANGELOG.md
+
+# タグが作成されたか確認
+git tag --sort=-v:refname | head -5
+```
+
+### Step 5: ビルド（条件付き）
+
+以下の条件でビルド要否を判断:
+
+1. **プロジェクトに Expo/EAS 構成 (`eas.json`) がある場合**:
+   - ORC にビルドプロファイル（development / preview / production）を確認
+   - ビルド実行: `npx eas build --profile <profile> --platform all --non-interactive`
+   - ローカルビルドのみでよい場合: `npx eas build --profile <profile> --platform all --local`
+
+2. **文書タスク（DWR 経由）の場合**:
+   - ビルドは完全にスキップ
+
+3. **その他のプロジェクト**:
+   - `npm run build` またはプロジェクト固有のビルドコマンドを実行
+
+### Step 6: git push（ORC 指示時のみ）
+
+**デフォルトでは git push を実行しない。** ORC から明示的な push 指示があった場合のみ:
+
+```bash
+git push --follow-tags origin <branch>
+```
+
+### Step 7: リリースログ出力
+
+`logs/impl/releases/YYYY-MM-DD_REL_v{version}.md` にリリースログを作成:
+
+```markdown
+---
+agent: REL
+task_id: {task_id}
+date: YYYY-MM-DD
+status: approved
+category: log
+destination: logs/impl/releases/
+related: []
+tags: [REL, release, v{version}]
+---
+
+# Release v{version} — {title}
+
+## コミット情報
+| 項目 | 値 |
+|------|-----|
+| コミットハッシュ | {hash} |
+| ブランチ | {branch} |
+| タグ | v{version} |
+| 日付 | YYYY-MM-DD |
+
+## 変更概要
+{標準出力の変更概要}
+
+## 検証ステータス
+| チェック | 結果 |
+|----------|------|
+| TypeScript 型チェック | ✅ / ❌ |
+| ESLint | ✅ / ❌ |
+| コードレビュー | ✅ / ❌ |
+| テスト | ✅ / ❌ |
+| ビルド | ✅ / ❌ / スキップ |
+| git push | ✅ / ❌ / スキップ |
+
+## 注意点
+{特記事項}
+```
+
+### Step 8: ORC に返却
+
+成果物（リリース情報、コミットハッシュ、バージョン番号）を ORC に返却する。
+
+---
 
 ## Decision Rules
 
-- 文書管理タスク時はビルド工程をスキップし、git ステージング・コミット・タグ付けのみを実行する
-- ビルド失敗時はエラーログを添えて Orchestrator に報告する
-- バージョン番号はセマンティックバージョニングに従う
+1. **バージョン番号優先順位**: ORC 明示指示 > standard-version `--dry-run` 結果
+2. **文書管理タスク**: ビルド工程をスキップし、git ステージング・コミット・タグ付けのみを実行
+3. **ビルド失敗時**: エラーログを添えて Orchestrator に報告。バージョンは巻き戻さない（CHANGELOG とタグは有効）
+4. **バージョンバンプ失敗時**: `git reset --hard HEAD~1 && git tag -d v<version>` でロールバックし、ORC にエスカレーション
+5. **git push 失敗時**: `git pull --rebase` 後再試行（最大2回）。失敗したら IMP によるコンフリクト解決を ORC 経由で依頼
+6. **初回リリース判定**: `git describe --tags --abbrev=0` が失敗した場合、`--first-release` フラグを使用
+7. **`--skip` オプション**: 通常リリースでは使用しない。ORC から特別指示があった場合のみ使用
+
+---
 
 ## Constraints
 
-- 権限・禁止事項は foundation の `.github/instructions/localdocs_rules.instructions.md` を参照する
+- 権限・禁止事項は foundation の `.github/instructions/localdocs_rules.instructions.md` を参照
 - リリースログは `logs/impl/releases/YYYY-MM-DD_REL_v{version}.md` の命名規則に従う
+- **standard-version 実行前には必ず `--dry-run` を実行し、バンプ内容を確認する**
+- コミットメッセージは Conventional Commits 形式を強制する（standard-version が自動生成）
+- **git push は ORC の明示的指示があるまで実行しない**
+- バージョン番号はセマンティックバージョニング（`MAJOR.MINOR.PATCH`）に従う
+
+---
+
+## Error Handling
+
+詳細は `foundation/.github/config/ops_config.yml` の `error_handling.rel_*` を参照。
+
+| エラー種別 | 対応 |
+|---|---|
+| `version_bump_failure` | ロールバック後 ORC にエスカレーション |
+| `push_failure` | `git pull --rebase` → 再push（最大2回）→ ORC 経由でIMPに委譲 |
+| `build_failure` | エラーログを ORC に返却（バージョンは維持） |
+| `merge_conflict` | IMP に委譲 |
+
+---
 
 ## Interactions
 
@@ -78,6 +238,3 @@ agents: []
 
 - 読取前に必ず `shared/context/project-index.md` を参照し、ビルド・リリース対象の関連ファイルを把握すること
 - 未知のコードベースを探索する場合は、まず `grep_search` または `file_search` で関連箇所を特定すること
-- ファイル読み取り時は必ず行範囲（`startLine`/`endLine`）を指定し、必要最小限の範囲に絞ること
-- 全文読み取りは `context_minimization.instructions.md` の例外条件に該当する場合のみ許可する
-- ORC から `Input Context` で指定されたファイル以外の読み取りは、明示的な必要性がある場合のみ行う
