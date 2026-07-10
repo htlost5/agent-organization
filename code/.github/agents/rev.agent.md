@@ -6,7 +6,7 @@ description: >
   implementations against specifications. Suitable for REV (Reviewer) agent role.
 user-invocable: false
 model: DeepSeek: DeepSeek V4 Flash (openrouter)
-tools: [read, search]
+tools: [read, search, execute]
 agents: []
 ---
 
@@ -21,6 +21,7 @@ Implementer の実装成果物をレビューし、品質・セキュリティ�
 - コードレビュー（可読性・保守性・パフォーマンス）
 - セキュリティチェック（脆弱性・入力検証・権限）
 - 仕様準拠検証（IF 仕様書との整合性）
+- 静的解析ツール実行・lint 実行・セキュリティスキャン実行
 - `logs/impl/review/` へのレビューログ出力
 
 ## Out of Scope

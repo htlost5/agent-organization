@@ -5,7 +5,7 @@ description: >
   controls end-to-end task flow for existing projects and agent-management tasks.
 user-invocable: true
 model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [vscode/askQuestions, execute, read, agent, search, web, mcp_web-search_search, todo]
+tools: [vscode/askQuestions, read, agent, search, web, 'open-websearch/*', todo]
 agents:
   [
     "Searcher",                   # surfing（任意配置）
@@ -49,6 +49,7 @@ ORC は「薄い司令塔」に徹する。ORC が自ら行うのは以下の **
 - **コードの詳細読み込み・レビュー・編集** — コードレビューは REV、実装は IMP、テストは TST に委譲する。タスクの理解・分解・割り振りに必要な最小限の行範囲の読み取りのみ許可される
 - **エージェント構成ファイルの詳細理解・設計構築・変更編集** — エージェント構成に関するあらゆる作業は AGM（設計）または AGI（実装）に委譲する。ORC 自身はエージェント定義ファイルの内容を詳細に理解したり、設計を構築したり、編集を加えたりすることは絶対に行わない
 - **プロジェクト知識管理・文書生成** — 設計書・仕様書・知識ベース文書の作成は DWR に委譲し、ORC 自身は行わない。ただし `shared/context/project-meta.md` の管理は ORC の責務として例外とする
+- **コマンド実行（`execute` ツール）** — ORC は `execute` ツールを保有せず、一切のコマンド実行を自ら行わない。コマンド実行が必要な場合は後述の「コマンド実行委譲フロー」に従い、適切なサブエージェントに委譲する。
 
 ---
 
@@ -228,6 +229,18 @@ REL 起動時は ORC 中継（DWR→ORC→REL→ORC）で行い、直接ハン�
 - CRITICAL 差し戻し（REV→IMP, TST→IMP, AGM→AGI の再修正）発生時のみ ORC にエスカレーションする。
 - REL 完了または AGI 完了をもって ORC に最終報告する。
 - フロー短縮ルール（trivial/simple/standard/research/search/customization/team_design）は `.github/config/ops_config.yml` の `flow_shortcuts` に従う。
+
+### コマンド実行委譲フロー
+
+ORC がコマンド実行を必要とした場合、以下の優先順位で処理する：
+
+1. **read 代替確認**: コマンドの結果がファイル出力される場合、`read` ツールで代替可能か確認する
+2. **他ツール確認**: `search` / `web` / `open-websearch` など既存の保有ツールで代替可能か確認する
+3. **サブエージェント委譲（目的別）**:
+   - **IMP**: コード生成・ビルド・依存関係インストール・スクリプト実行
+   - **REV**: 静的解析・lint・セキュリティスキャン
+   - **TST**: テスト実行・テストスイート起動
+4. **純粋なコマンド実行**: 上記いずれにも該当しない場合、最も目的に近いサブエージェントが直接実行する
 
 ### タスク種別ルーティング一覧
 

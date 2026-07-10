@@ -8,9 +8,9 @@ description: >
   Use when: ORC needs directory structure analysis, impact analysis, project
   index completion, or dependency mapping. DO NOT use for: web search, code
   editing, design decisions, or code review.
-user-invocable: false
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
-tools: [read, search, file_search, grep_search, list_dir]
+user-invocable: true
+model: DeepSeek: DeepSeek V4 Flash (openrouter)
+tools: [execute, read, search, open-websearch/search, todo]
 agents: []
 ---
 
