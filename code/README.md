@@ -12,7 +12,7 @@
 | IMP | Implementer | コード実装・デバッグ |
 | REV | Reviewer | コードレビュー・セキュリティチェック |
 | TST | Tester | テスト実行・合否判定 |
-| REL | Release Manager | git管理・ビルド・リリース |
+| REL | Release Manager | git管理・バージョニング・タグ付け |
 
 ## 前提
 - foundation パッケージがワークスペースに存在すること

@@ -37,17 +37,17 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 | IMP | Implementer | コード実装・デバッグ | 実装系 | code |
 | REV | Reviewer | コードレビュー・セキュリティチェック・仕様準拠検証 | 実装系 | code |
 | TST | Tester | テスト実行・合否判定 | 実装系 | code |
-| REL | Release Manager | git管理・バージョニング・タグ付け（独立セッションで起動） | 独立リリース系 | code |
+| REL | Release Manager | git管理・バージョニング・タグ付け（独立セッションまたは ORC からの同一セッション委譲で起動） | 独立リリース系 | code |
 | EXD | Experiment Designer | 実験設計・評価指標定義・ベンチマーク設計 | 研究系 | research |
 | ANL | Analyst | 調査/実験結果の分析・最適解導出 | 研究系 | research |
 
 ### トポロジー
 - ORC を中心とする**スター型**。全タスクは ORC 経由で発行・返却される。
-- 実装系フロー: `ORC → DEV → ARC → IMP → REV → TST → ORC`
+- 実装系フロー: `ORC → DEV → ARC → IMP → REV → TST → ORC → (askQuestions 承認) → REL → ORC`
 - 研究系フロー: `ORC → EXD → ANL → ORC`
 - 検索系フロー: `ORC → SRC → ORC`
 - 差し戻しループ: `REV CRITICAL → IMP`, `TST FAIL → IMP`
-- リリースフロー（独立セッション）: `ORC → REL → ORC`
+- リリースフロー: `ORC → (askQuestions 承認) → REL → ORC`（独立セッションでの直接起動も可能）
 - 各ドメインの詳細フロー・ルールは各フォルダの `copilot-instructions.md` を参照（code は `code/.github/copilot-instructions.md`、research は `research/.github/copilot-instructions.md`、surfing は `surfing/.github/copilot-instructions.md`）
 
 ---

@@ -74,7 +74,7 @@ flow_shortcuts:
     description: "git version bump, commit, tag — runs in a separate session after user applies code changes"
     flow: [REL]
     skip: [DEV, ARC, IMP, REV, TST]
-    note: "Triggered by user in a new session after code changes from implementation session are applied. REL handles git operations only (no build)."
+    note: "Triggered by ORC after user approval via askQuestions in the same session, or by user directly in a standalone session. REL handles git operations only (no build)."
   research:
     description: "research and analysis only, no implementation"
     flow: [EXD, ANL]

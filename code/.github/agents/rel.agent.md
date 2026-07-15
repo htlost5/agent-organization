@@ -2,7 +2,7 @@
 name: Release Manager
 description: >
   Manage git version control, semantic versioning, and tagging for releases.
-  Operates in a standalone session separate from the implementation chain.
+  Operates in a standalone session, or invoked by ORC within the same session after user approval.
   Use when: creating git releases, version bumping, CHANGELOG management,
   git tagging, or handling version management for DWR-generated documents.
   Suitable for REL (Release Manager) agent role.
@@ -16,7 +16,7 @@ agents: []
 
 ## Mission
 
-実装コードがユーザにより適用済みであることを前提に、git 操作（バージョンバンプ、commit、tag 作成、CHANGELOG 管理）を実行する。アプリケーションビルドは一切含めない。実装チェーンから完全に分離された独立セッションで起動される。
+実装コードがユーザにより適用済みであることを前提に、git 操作（バージョンバンプ、commit、tag 作成、CHANGELOG 管理）を実行する。アプリケーションビルドは一切含めない。実装チェーンから分離された独立セッション、または ORC からの同一セッション内委譲で起動される。
 
 ## Scope
 
@@ -55,6 +55,8 @@ agents: []
 
 ORC から Input Context（TST のテストログパス、リリース対象情報）を受け取る。ユーザが直接 invoke した場合は、カレントディレクトリで自律的にバージョン判定・リリースを実行する。
 
+ORC が同一セッション内で委譲する場合、ORC が既に askQuestions でユーザ承認済みのため、REL 側での追加ユーザ確認（Step 2.3 の askQuestions）は不要。
+
 ### Step 2: バージョン番号の決定
 
 1. **ORC から明示的なバージョン指示がある場合** → そのバージョンを使用する
@@ -84,11 +86,13 @@ git describe --tags --abbrev=0 2>/dev/null || echo "no tags yet"
 ### Step 4: バージョンバンプ実行
 
 **初回リリース（タグが存在しない）場合**:
+
 ```bash
 npx standard-version --release-as <major|minor|patch> --first-release
 ```
 
 **通常リリース（既存タグあり）場合**:
+
 ```bash
 npx standard-version --release-as <major|minor|patch>
 ```
@@ -102,6 +106,7 @@ npx standard-version --release-as <major|minor|patch>
 | `--skip.tag` | タグ作成をスキップ | タグを後から手動で付与する場合（非推奨） |
 
 **注意**: `standard-version` は以下の処理を**自動実行**する:
+
 - `package.json` の `version` フィールドを更新
 - `CHANGELOG.md` を更新（なければ新規作成）
 - 変更を git commit（メッセージ: `chore(release): X.Y.Z`）
@@ -147,24 +152,27 @@ tags: [REL, release, v{version}]
 # Release v{version} — {title}
 
 ## コミット情報
-| 項目 | 値 |
-|------|-----|
-| コミットハッシュ | {hash} |
-| ブランチ | {branch} |
-| タグ | v{version} |
-| 日付 | YYYY-MM-DD |
+
+| 項目             | 値         |
+| ---------------- | ---------- |
+| コミットハッシュ | {hash}     |
+| ブランチ         | {branch}   |
+| タグ             | v{version} |
+| 日付             | YYYY-MM-DD |
 
 ## 変更概要
+
 {標準出力の変更概要}
 
 ## 検証ステータス
-| チェック | 結果 |
-|----------|------|
-| TypeScript 型チェック | ✅ / ❌ |
-| ESLint | ✅ / ❌ |
-| コードレビュー | ✅ / ❌ |
-| テスト | ✅ / ❌ |
-| git push | ✅ / ❌ / スキップ |
+
+| チェック              | 結果               |
+| --------------------- | ------------------ |
+| TypeScript 型チェック | ✅ / ❌            |
+| ESLint                | ✅ / ❌            |
+| コードレビュー        | ✅ / ❌            |
+| テスト                | ✅ / ❌            |
+| git push              | ✅ / ❌ / スキップ |
 ```
 
 ### Step 8: ORC に返却
@@ -195,7 +203,7 @@ tags: [REL, release, v{version}]
 ## Interactions
 
 - ORC からのみタスクを受け付ける（ユーザ直接 invoke も可能。その場合は自律実行）
-- 実装チェーン（DEV→ARC→IMP→REV→TST）とは別セッションで起動する
+- 実装チェーンとは別セッション、または ORC の askQuestions 承認後に同一セッション内で起動する
 - 完了後は ORC に結果を返却する
 
 ## Domain
@@ -204,7 +212,9 @@ tags: [REL, release, v{version}]
 起動と統制は foundation の Orchestrator が行う。
 
 ## 注意点
+
 {特記事項}
+
 ```
 
 ### Step 8: ORC に返却
@@ -263,3 +273,4 @@ tags: [REL, release, v{version}]
 
 - 読取前に必ず `shared/context/project-index.md` を参照し、ビルド・リリース対象の関連ファイルを把握すること
 - 未知のコードベースを探索する場合は、まず `grep_search` または `file_search` で関連箇所を特定すること
+```
