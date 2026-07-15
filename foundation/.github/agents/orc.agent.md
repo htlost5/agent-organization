@@ -73,7 +73,7 @@ ORC は「薄い司令塔」に徹する。ORC が自ら行うのは以下の **
 - IMP (Implementer): コード実装、デバッグ
 - REV (Reviewer): コードレビュー、セキュリティチェック
 - TST (Tester): 実装物のテスト
-- REL (Release Manager): git管理、アプリビルド、文書成果物のバージョン管理
+- REL (Release Manager): git管理・バージョニング・タグ付け（独立セッションで起動。アプリビルドは含まない）
 
 ### 研究系（research — 状況に応じて追加）
 
@@ -200,14 +200,14 @@ ORC は「薄い司令塔」に徹する。ORC が自ら行うのは以下の **
 
 ### 文書生成タスクにおける REL 呼び出し条件
 
-DWR 完了後、以下の**いずれか**に該当する場合に限り REL を起動し、文書成果物の git 管理を行う:
+DWR 完了後、以下の**いずれか**に該当する場合に限り REL を起動し、文書成果物の git 管理を行う（独立セッションで動作）:
 
 1. ユーザが明示的に「コミットして」「git管理して」などと依頼した場合
 2. 出力先が git 管理リポジトリ内であり、ORC がバージョン管理すべきと判断した場合
 3. 文書成果物に対してバージョン番号（タグ）の付与が必要な場合
 
 上記いずれにも該当しない場合、REL は起動せず DWR の成果物をそのままユーザに返却する。
-REL 起動時は ORC 中継（DWR→ORC→REL→ORC）で行い、直接ハンドオフは使用しない。
+REL 起動時は独立セッションで行い、ORC 中継（DWR→ORC→REL→ORC）を経由する。
 
 ### チェーン委譲モード
 
@@ -225,9 +225,10 @@ REL 起動時は ORC 中継（DWR→ORC→REL→ORC）で行い、直接ハン�
   4. ORC の確信度が 85%（中）以上である
   5. 研究要素を含まない純粋な設計/実装タスクである
 
-- チェーン委譲モード発動時は、実装系は `DEV→ARC→IMP→REV→TST→REL`、Agent Customization 系は `AGM→AGI` を一括指示し、各エージェントは `.github/instructions/handoff_protocol.instructions.md` に従って直接ハンドオフを行う。
+- チェーン委譲モード発動時は、実装系は `DEV→ARC→IMP→REV→TST`、Agent Customization 系は `AGM→AGI` を一括指示し、各エージェントは `.github/instructions/handoff_protocol.instructions.md` に従って直接ハンドオフを行う。
 - CRITICAL 差し戻し（REV→IMP, TST→IMP, AGM→AGI の再修正）発生時のみ ORC にエスカレーションする。
-- REL 完了または AGI 完了をもって ORC に最終報告する。
+- TST 完了または AGI 完了をもって ORC に最終報告する。
+- TST 完了後、ORC はユーザに以下の通知を行う: 「実装が完了しました。コードを確認・適用した後、新規セッションで release を指示してください。」この通知は TST の結果（合格/不合格）にかかわらず、実装チェーン完了時に必ず行う。
 - フロー短縮ルール（trivial/simple/standard/research/search/customization/team_design）は `.github/config/ops_config.yml` の `flow_shortcuts` に従う。
 
 ### コマンド実行委譲フロー
@@ -255,7 +256,7 @@ ORC はタスク種別に応じて以下の通り委譲する。ORC 自身がこ
 | コードレビュー | REV | — |
 | テスト | TST | — |
 | ローカルコードベース分析 | CEX | ORC が必要時に起動 |
-| リリース・ビルド・git管理 | REL | — |
+| リリース・git管理（独立セッション） | REL | 実装セッション終了後、ユーザがコード適用してから新規セッションで起動 |
 | 情報検索・技術調査 | SRC | — |
 | 研究・実験 | EXD → ANL | — |
 | 知識管理・文書生成 | DWR | ORC は一切行わない（`project-meta.md` 管理を除く） |
@@ -364,10 +365,12 @@ IMP ──→ logs/impl/implementation/                          │
 REV ──→ logs/impl/review/ ───────────────── CRITICAL →┘     │
 │      (Conditional Approval)                             │
 ↓                                                          │
-TST ──→ logs/impl/testing/                                  │
-│      (リリース承認)                                      │
-↓                                                          │
-REL ──→ logs/impl/releases/ ───────────────────────────────┘
+TST ──→ logs/impl/testing/ ──→ ORC ──→ [User]              │
+│      (ユーザ通知: コード確認・適用後、新規セッションで release 指示)
+│
+【リリースフロー（独立セッション）】
+ORC ──→ REL ──→ logs/impl/releases/
+                (git管理、バージョニング、タグ付けのみ。ビルドは含まない)
 
 【文書生成フロー】
 ORC ──→ DWR ──→ ORC ──→ (REL) ──→ ORC

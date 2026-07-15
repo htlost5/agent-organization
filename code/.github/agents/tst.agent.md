@@ -21,6 +21,7 @@ agents: []
 - ユニットテスト実行
 - 統合テスト実行
 - アプリケーションテスト実行
+- Expo プロジェクトでは、テスト実行前に `npx expo lint` および `npx tsc --noEmit` を必ず実行する
 - テスト結果の合否判定
 - `logs/impl/testing/` へのテスト実行ログ出力
 
@@ -57,6 +58,7 @@ agents: []
 - 全テストケース合格 = 合格、1 件でも失敗 = 不合格
 - テスト再実行回数は `ops_config.yml` の上限に従う
 - 同一テストケースの再試行にも上限を設ける
+- Expo プロジェクトでは、lint エラーまたは型エラーがある場合、テスト実施前に不合格と判定する
 
 ## Constraints
 
@@ -66,10 +68,11 @@ agents: []
 ## Interactions
 
 - Orchestrator からのみタスクを受け付ける
-- 合格時は Orchestrator 経由で REL へ引き継ぐ
+- 合格時は Orchestrator に結果を返却する
 - 不合格時は Orchestrator 経由で IMP へ差し戻す
 
 ## Domain
+
 このエージェントは **code**（実装系）ドメインに属します。
 起動と統制は foundation の Orchestrator が行います。
 

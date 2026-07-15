@@ -1,6 +1,6 @@
 # Code Domain — Implementation Agent Rules
 
-このファイルは実装系エージェント（DEV, ARC, IMP, REV, TST, REL）に適用されるドメイン固有ルールを定義します。
+このファイルは実装系エージェント（DEV, ARC, IMP, REV, TST）に適用されるドメイン固有ルールを定義します（REL は独立セッションで動作するスタンドアロンエージェント）。
 共通ルールは foundation の `.github/copilot-instructions.md` を参照してください。
 
 ---
@@ -9,16 +9,16 @@
 
 ### 標準フロー
 
-`ORC → (RES) → DEV → ARC → IMP → REV → TST → REL → ORC`
+`ORC → DEV → ARC → IMP → REV → TST → ORC`
 
 ### フロー短縮（foundation の `ops_config.yml` 参照）
 
-| 種別             | フロー                                    | 適用条件                                               |
-| ---------------- | ----------------------------------------- | ------------------------------------------------------ |
-| **trivial**      | `IMP → TST → REL`                         | タイポ修正・単純設定変更・1行パッチ                    |
-| **modification** | `IMP → REV → TST → REL`                   | バグ修正・リファクタリング・コード改善（設計変更不要） |
-| **simple**       | `DEV → IMP → REV → TST → REL`             | 小規模機能追加（新設計必要、アーキテクチャ変更不要）   |
-| **standard**     | `DEV → ARC → IMP → REV → TST → REL` | 新技術導入・システム構造変更・大規模新機能             |
+| 種別             | フロー                         | 適用条件                                               |
+| ---------------- | ------------------------------ | ------------------------------------------------------ |
+| **trivial**      | `IMP → TST`                    | タイポ修正・単純設定変更・1行パッチ                    |
+| **modification** | `IMP → REV → TST`              | バグ修正・リファクタリング・コード改善（設計変更不要） |
+| **simple**       | `DEV → IMP → REV → TST`        | 小規模機能追加（新設計必要、アーキテクチャ変更不要）   |
+| **standard**     | `DEV → ARC → IMP → REV → TST`  | 新技術導入・システム構造変更・大規模新機能             |
 
 ---
 
@@ -34,10 +34,10 @@
 
 ### 動作
 
-- ORC は `DEV→ARC→IMP→REV→TST→REL` を 1回のバッチ指示で起動
+- ORC は `DEV→ARC→IMP→REV→TST` を 1回のバッチ指示で起動
 - 各エージェントは foundation の `handoff_protocol.instructions.md` に従い直接ハンドオフ
 - CRITICAL 差し戻し（REV→IMP, TST→IMP）発生時のみ ORC にエスカレーション
-- REL 完了後、ORC に最終報告
+- TST 完了後、ORC に最終報告
 
 ---
 
@@ -49,12 +49,11 @@
 | ARC  | IMP | IF仕様書(`IF-XXX`), アーキテクチャ決定(`ADR-XXX`) |
 | IMP  | REV | 実装コード, 実装ログ                              |
 | REV  | TST | レビュー済みコード, レビューログ                  |
-| TST  | REL | テスト合格コード, テストログ                      |
-| REL  | ORC | リリース情報, コミットハッシュ                    |
+| ORC  | ユーザ | 「実装完了。コード確認・適用後、新規セッションで release 指示」通知 |
 
 ---
 
 ## 4. 実装系固有のエラーハンドリング
 
 詳細は foundation の `.github/config/ops_config.yml` を参照。
-実装系に特に関連するセクション: `implementation`, `error_handling.imp_*`, `error_handling.rev_*`, `error_handling.tst_*`, `error_handling.rel_*`
+実装系に特に関連するセクション: `implementation`, `error_handling.imp_*`, `error_handling.rev_*`, `error_handling.tst_*`, `error_handling.rel_*`（REL は独立セッションで動作するが、エラーハンドリング定義は維持）

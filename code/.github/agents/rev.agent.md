@@ -22,6 +22,7 @@ Implementer の実装成果物をレビューし、品質・セキュリティ�
 - セキュリティチェック（脆弱性・入力検証・権限）
 - 仕様準拠検証（IF 仕様書との整合性）
 - 静的解析ツール実行・lint 実行・セキュリティスキャン実行
+- Expo プロジェクトでは、レビュー開始前に `npx expo lint` および `npx tsc --noEmit` を必ず実行する
 - `logs/impl/review/` へのレビューログ出力
 
 ## Out of Scope
@@ -58,6 +59,7 @@ Implementer の実装成果物をレビューし、品質・セキュリティ�
 - セキュリティ脆弱性は 1 件でも CRITICAL とする
 - 仕様不適合は重大度に応じて CRITICAL または条件付き承認とする
 - スタイル・可読性の指摘は条件付き承認で留める
+- Expo プロジェクトでは、lint エラーまたは型エラーが残存する場合は CRITICAL として IMP に差し戻す
 
 ## Constraints
 
@@ -72,6 +74,7 @@ Implementer の実装成果物をレビューし、品質・セキュリティ�
 - CRITICAL 時は Orchestrator 経由で IMP へ差し戻す
 
 ## Domain
+
 このエージェントは **code**（実装系）ドメインに属します。
 起動と統制は foundation の Orchestrator が行います。
 

@@ -52,33 +52,38 @@ inbox_approval:
 flow_shortcuts:
   trivial:
     description: "typo fix, simple config change, one-line patch"
-    flow: [IMP, TST, REL]
+    flow: [IMP, TST]
     skip: [DEV, ARC, REV]
     # See also: code/.github/copilot-instructions.md
   modification:
     description: "bug fix, code improvement, refactoring, review feedback — no new design required"
-    flow: [IMP, REV, TST, REL]
+    flow: [IMP, REV, TST]
     skip: [DEV, ARC]
     # See also: code/.github/copilot-instructions.md
   simple:
     description: "small utility or feature addition where DEV design is needed but no architecture change"
-    flow: [DEV, IMP, REV, TST, REL]
+    flow: [DEV, IMP, REV, TST]
     skip: [ARC]
     # See also: code/.github/copilot-instructions.md
   standard:
     description: "new feature with architecture impact, new technology integration, or system structure change"
-    flow: [DEV, ARC, IMP, REV, TST, REL]
+    flow: [DEV, ARC, IMP, REV, TST]
     skip: []
     # See also: code/.github/copilot-instructions.md
+  release:
+    description: "git version bump, commit, tag — runs in a separate session after user applies code changes"
+    flow: [REL]
+    skip: [DEV, ARC, IMP, REV, TST]
+    note: "Triggered by user in a new session after code changes from implementation session are applied. REL handles git operations only (no build)."
   research:
     description: "research and analysis only, no implementation"
     flow: [EXD, ANL]
-    skip: [DEV, ARC, IMP, REV, TST, REL]
+    skip: [DEV, ARC, IMP, REV, TST]
     # See also: research/.github/copilot-instructions.md
   search:
     description: "web search, literature survey, technical documentation lookup"
     flow: [SRC]
-    skip: [DEV, ARC, IMP, REV, TST, REL]
+    skip: [DEV, ARC, IMP, REV, TST]
 
   document:
     description: "structured document generation (design docs, specs, knowledge base)"
@@ -166,10 +171,6 @@ error_handling:
     notify_user: true
 
   # REL
-  rel_build_failure:
-    max_retries: 1
-    action: "report build error log to ORC"
-    escalation: "request IMP to fix build error"
   rel_merge_conflict:
     action: "request IMP to resolve via ORC"
     notify_user: false

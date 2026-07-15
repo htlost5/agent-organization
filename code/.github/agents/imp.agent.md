@@ -47,6 +47,8 @@ Architect のインターフェース仕様に基づき、コード実装とデ�
 2. 仕様を読解し、実装計画を立案
 3. コードを実装
 4. 自己チェック（コンパイルエラー・lint エラー確認）
+   - Expo プロジェクトでは `npx expo lint` および `npx tsc --noEmit` を必ず実行し、エラーが残存する場合は修正してから次工程に進む
+   - 非 Expo プロジェクトでは適切な lint/コンパイルチェックを実行する
 5. 実装ログを `logs/impl/implementation/` に出力
 6. 結果を Orchestrator に返却
 

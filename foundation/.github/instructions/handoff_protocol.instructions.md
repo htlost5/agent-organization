@@ -183,8 +183,8 @@ ORC がサブエージェントを呼び出す際のプロンプト構造：
 ORC → DEV → ORC → ARC → ORC → IMP → ...
 
 【チェーン委譲モード】
-ORC → DEV → ARC → IMP → REV → TST → REL → ORC
-        ↑       ↑      ↑     ↑      ↑      ↑
+ORC → DEV → ARC → IMP → REV → TST → ORC
+        ↑       ↑      ↑     ↑      ↑
         各矢印で HANDOFF フォーマットを使用
 ```
 
@@ -192,7 +192,7 @@ ORC → DEV → ARC → IMP → REV → TST → REL → ORC
 - ORC は最初の DEV にのみ Task Context を注入する。
 - 各エージェントは HANDOFF の `Routing.Next Agent` を確認し、指定されたエージェントに直接委譲する。
 - CRITICAL 差し戻し（REV→IMP, TST→IMP）が発生した場合、差し戻し元は ORC にも通知する（CC）。
-- REL が最終 HANDOFF を ORC に返却して終了。
+- TST が最終 HANDOFF を ORC に返却して終了。
 
 ---
 
