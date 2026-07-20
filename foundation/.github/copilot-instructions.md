@@ -37,7 +37,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 | IMP | Implementer | コード実装・デバッグ | 実装系 | code |
 | REV | Reviewer | コードレビュー・セキュリティチェック・仕様準拠検証 | 実装系 | code |
 | TST | Tester | テスト実行・合否判定 | 実装系 | code |
-| REL | Release Manager | git管理・バージョニング・タグ付け（独立セッションまたは ORC からの同一セッション委譲で起動） | 独立リリース系 | code |
+| REL | Release Manager | git管理・バージョニング・タグ付け（ユーザ指定時のみ。独立セッションまたは ORC からの同一セッション委譲で起動） | 独立リリース系 | code |
 | EXD | Experiment Designer | 実験設計・評価指標定義・ベンチマーク設計 | 研究系 | research |
 | ANL | Analyst | 調査/実験結果の分析・最適解導出 | 研究系 | research |
 

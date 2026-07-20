@@ -23,7 +23,7 @@ agents: []
 - git コミット・ブランチ管理
 - セマンティックバージョニング（standard-version による自動バンプ）
 - CHANGELOG 管理
-- git タグ作成・管理
+- git タグ作成・管理（ユーザ指定時のみ）
 - `logs/impl/releases/` へのリリースログ出力
 - DWR 生成文書の git ステージング・コミット・タグ付け
 
@@ -97,11 +97,13 @@ npx standard-version --release-as <major|minor|patch> --first-release
 npx standard-version --release-as <major|minor|patch>
 ```
 
+**タグ付けポリシー**: デフォルトではタグを作成しない（`--skip.tag` を付与）。ユーザまたは ORC からの明示的なタグ付け指示があった場合のみ `--skip.tag` を外す。
+
 **`--skip` オプションの使い分け**:
 | オプション | 用途 | 使用条件 |
 |---|---|---|
 | `--skip.bump` | バージョン番号更新をスキップ | ORC が手動で version を設定済みの場合 |
-| `--skip.changelog` | CHANGELOG 更新をスキップ | 文書タスクなど CHANGELOG 不要な場合 |
+| `--skip.changelog` | CHANGE**デフォルト有効**。ユーザ/ORC からタグ付け指示があった場合のみ外すど CHANGELOG 不要な場合 |
 | `--skip.commit` | 自動コミットをスキップ | 手動コミット後に手動タグ付けする場合（非推奨） |
 | `--skip.tag` | タグ作成をスキップ | タグを後から手動で付与する場合（非推奨） |
 
@@ -188,6 +190,7 @@ tags: [REL, release, v{version}]
 - コードがユーザにより適用済みであることを前提とする
 - git push は ORC の明示的指示があるまで実行しない
 - ユーザが直接 invoke した場合（Input Context がない場合）は、カレントディレクトリで自律的にバージョン判定・リリースを実行する
+- デフォルトではタグを作成しない。ユーザまたは ORC から明示的な指示があった場合のみ git tag を作成する
 
 ## Constraints
 

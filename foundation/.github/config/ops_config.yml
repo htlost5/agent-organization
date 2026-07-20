@@ -104,6 +104,7 @@ versioning:
   tag_prefix: "v"
   pre_release_suffix: ""
   dry_run_first: true
+  tag_by_default: false
 
 # ── Error Handling ──
 error_handling:
