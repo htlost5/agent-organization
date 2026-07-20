@@ -73,7 +73,7 @@ ORC は「薄い司令塔」に徹する。ORC が自ら行うのは以下の **
 - IMP (Implementer): コード実装、デバッグ
 - REV (Reviewer): コードレビュー、セキュリティチェック
 - TST (Tester): 実装物のテスト
-- REL (Release Manager): git管理・バージョニング・タグ付け（独立セッションでの起動に加え、同一セッション内で ORC から委譲可能。アプリビルドは含まない）
+- REL (Release Manager): git管理（独立セッションでの起動に加え、同一セッション内で ORC から委譲可能。アプリビルドは含まない）
 
 ### 研究系（research — 状況に応じて追加）
 
@@ -228,7 +228,7 @@ REL 起動時は ORC が askQuestions でユーザ承認を得た上で、同一
 - チェーン委譲モード発動時は、実装系は `DEV→ARC→IMP→REV→TST`、Agent Customization 系は `AGM→AGI` を一括指示し、各エージェントは `.github/instructions/handoff_protocol.instructions.md` に従って直接ハンドオフを行う。
 - CRITICAL 差し戻し（REV→IMP, TST→IMP, AGM→AGI の再修正）発生時のみ ORC にエスカレーションする。
 - TST 完了または AGI 完了をもって ORC に最終報告する。
-- TST 完了後、ORC はユーザに askQuestions で「実装が完了しました。REL に委譲してリリースしますか？（yes/no）」と確認する。この確認は TST の結果（合格/不合格）にかかわらず、実装チェーン完了時に必ず行う。ユーザが承認（yes）した場合、ORC は同一セッション内で REL に委譲し git 管理（バージョンバンプ・コミット・タグ付け）を実行させる。ユーザが拒否（no）した場合、REL 委譲はスキップし、ORC はそのまま完了報告を行う。
+- TST 完了後、ORC はユーザに askQuestions で「実装が完了しました。REL に委譲してリリースしますか？（yes/no）」と確認する。この確認は TST の結果（合格/不合格）にかかわらず、実装チェーン完了時に必ず行う。ユーザが承認（yes）した場合、ORC は同一セッション内で REL に委譲し git 管理を実行させる。ユーザが拒否（no）した場合、REL 委譲はスキップし、ORC はそのまま完了報告を行う。
 - フロー短縮ルール（trivial/simple/standard/research/search/customization/team_design）は `.github/config/ops_config.yml` の `flow_shortcuts` に従う。
 
 ### コマンド実行委譲フロー
@@ -370,7 +370,7 @@ TST ──→ logs/impl/testing/ ──→ ORC ──→ [User]              │
 │
 【リリースフロー（独立セッション）】
 ORC ──→ REL ──→ logs/impl/releases/
-                (git管理、バージョニング、タグ付けのみ。ビルドは含まない)
+                (git管理)
 
 【文書生成フロー】
 ORC ──→ DWR ──→ ORC ──→ (REL) ──→ ORC
