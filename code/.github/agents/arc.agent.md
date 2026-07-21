@@ -8,7 +8,7 @@ description: >
   implementation within existing architecture, bug fixes, refactoring, or minor improvements.
   Suitable for ARC (Architect) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
+model: OpenCode Go / Deepseek V4 Pro (opencodego)
 tools: [read, search, web]
 agents: []
 ---

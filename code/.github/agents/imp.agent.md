@@ -5,7 +5,7 @@ description: >
   Use when: implementing features, writing code, fixing bugs, or debugging
   applications. Suitable for IMP (Implementer) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: OpenCode Go / Deepseek V4 Flash (opencodego)
 tools: [read, search, edit, execute]
 agents: []
 ---

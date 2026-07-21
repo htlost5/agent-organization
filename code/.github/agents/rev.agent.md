@@ -5,7 +5,7 @@ description: >
   requests, checking code quality, performing security audits, or validating
   implementations against specifications. Suitable for REV (Reviewer) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: OpenCode Go / Deepseek V4 Flash (opencodego)
 tools: [read, search, execute]
 agents: []
 ---

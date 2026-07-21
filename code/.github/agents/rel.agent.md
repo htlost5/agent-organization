@@ -7,7 +7,7 @@ description: >
   git tagging, or handling version management for DWR-generated documents.
   Suitable for REL (Release Manager) agent role.
 user-invocable: true
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: OpenCode Go / Deepseek V4 Flash (opencodego)
 tools: [read, search, execute]
 agents: []
 ---

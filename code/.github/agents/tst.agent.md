@@ -5,7 +5,7 @@ description: >
   integration tests, application tests, or validating that implementations meet
   requirements. Suitable for TST (Tester) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: OpenCode Go / Deepseek V4 Flash (opencodego)
 tools: [read, search, execute]
 agents: []
 ---

@@ -12,7 +12,7 @@ description: >
   DO NOT use for: editing core system agents (ORC/SRC/DEV/ARC/IMP/REV/TST/REL/EXD/ANL),
   writing to _inbox/shared/logs, or any file creation.
 user-invocable: true
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
+model: OpenCode Go / Deepseek V4 Pro (opencodego)
 tools: [vscode/askQuestions, read, agent, search, web, open-websearch/search, todo]
 agents: ["Agent Manager (Implementer)"]
 ---

@@ -9,7 +9,7 @@ description: >
   index completion, or dependency mapping. DO NOT use for: web search, code
   editing, design decisions, or code review.
 user-invocable: true
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: OpenCode Go / Deepseek V4 Flash (opencodego)
 tools: [execute, read, search, open-websearch/search, todo]
 agents: []
 ---

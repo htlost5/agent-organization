@@ -8,7 +8,7 @@ description: >
   or tasks where implementation path is already clear.
   Suitable for DEV (DevPlanner) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
+model: OpenCode Go / Deepseek V4 Pro (opencodego)
 tools: [read, search, web, vscode/askQuestions]
 agents: []
 ---

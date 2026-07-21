@@ -4,7 +4,7 @@ description: >
   Orchestrates sub-agents (SRC/AGM/AGI/DWR/DEV/ARC/IMP/REV/TST/REL/EXD/ANL) and
   controls end-to-end task flow for existing projects and agent-management tasks.
 user-invocable: true
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
+model: OpenCode Go / Deepseek V4 Pro (opencodego)
 tools: [vscode/askQuestions, read, agent, search, web, 'open-websearch/*', todo]
 agents:
   [
