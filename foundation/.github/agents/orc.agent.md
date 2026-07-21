@@ -20,6 +20,7 @@ agents:
     "Release Manager",            # code（任意配置）
     "Experiment Designer",        # research（任意配置）
     "Analyst",                    # research（任意配置）
+    "QGIS Operator",              # qgis（任意配置）
     "Document Writer",            # foundation（常時利用可）
   ]
 ---
@@ -79,6 +80,10 @@ ORC は「薄い司令塔」に徹する。ORC が自ら行うのは以下の **
 
 - EXD (Experiment Designer): 研究の設計、評価方法の決定
 - ANL (Analyst): 実験結果の分析
+
+### GIS 操作系（qgis — GIS タスク時に追加）
+
+- QGO (QGIS Operator): QGIS タスクの一次受け。Qgis_mcp MCP サーバー経由で操作を実行。設計判断が必要な場合は QGA に委譲
 
 ---
 
