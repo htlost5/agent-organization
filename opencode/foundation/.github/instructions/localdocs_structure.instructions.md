@@ -1,0 +1,144 @@
+---
+name: Local Docs Structure Rules
+description: Define the Local Docs Directory Structure
+---
+
+## 1. エージェント一覧
+
+`ORC`: Orchestrator — foundation
+
+`SRC`: Searcher — surfing
+
+`AGM`: Agent Manager (Architect) — foundation
+
+`AGI`: Agent Manager (Implementer) — foundation
+
+`DWR`: Document Writer — foundation
+
+`DEV`: DevPlanner — code
+
+`ARC`: Architect — code
+
+`IMP`: Implementer — code
+
+`REV`: Reviewer — code
+
+`TST`: Tester — code
+
+`REL`: Release Manager — code
+
+`EXD`: Experiment Designer — research
+
+`ANL`: Analyst — research
+
+---
+
+## 2. ディレクトリ構造
+
+```
+docs/
+│
+├── _inbox/                          # 全エージェント必須の一時書き込み場所
+│   └── YYYY-MM-DD_HHMM_{ID}_{slug}.md
+│
+├── shared/                          # エージェント間共有情報
+│   ├── tasks/                       # タスク定義・進捗管理（foundation: ORC）
+│   │   ├── active/
+│   │   │   └── TASK-{ID}_{title}.md
+│   │   └── archive/
+│   │       └── TASK-{ID}_{title}.md
+│   │
+│   ├── context/                     # プロジェクト共通知識（foundation）
+│   │   ├── project-meta.md
+│   │   └── glossary.md
+│   │
+│   ├── impl/                        # 実装系共有情報（code ドメイン）
+│   │   ├── decisions/
+│   │   │   ├── design/              # DEV: 機能・仕様の決定事項
+│   │   │   │   └── DD-{ID}_{title}.md
+│   │   │   └── architecture/        # ARC: 構成・技術スタック選定
+│   │   │       └── ADR-{ID}_{title}.md
+│   │   └── specs/
+│   │       ├── requirements/        # DEV → ARC: 要件定義
+│   │       │   └── REQ-{ID}_{title}.md
+│   │       └── interfaces/          # ARC → IMP: インターフェース仕様
+│   │           └── IF-{ID}_{title}.md
+│   │
+│   ├── search/                      # 検索系共有情報（surfing ドメイン）
+│   │   ├── decisions/
+│   │   │   └── search/              # SRC: 調査方針
+│   │   │       └── SD-{ID}_{title}.md
+│   │   └── specs/
+│   │       └── search-results/      # SRC: 調査結果
+│   │           └── SR-{ID}_{title}.md
+│   │
+│   └── res/                         # 研究系共有情報（research ドメイン）
+│       ├── decisions/
+│       │   └── experiment/          # EXD: 実験設計・評価指標
+│       │       └── EXP-{ID}_{title}.md
+│       └── specs/
+│           └── experiment-results/  # EXD → ANL: 実験結果
+│               └── ER-{ID}_{title}.md
+│
+└── logs/                            # 各エージェントの作業ログ
+    ├── impl/                        # 実装系ログ
+    │   ├── planning/                # DEV
+    │   │   └── YYYY-MM-DD_DEV_{topic}.md
+    │   ├── architecture/            # ARC
+    │   │   └── YYYY-MM-DD_ARC_{topic}.md
+    │   ├── implementation/          # IMP
+    │   │   └── YYYY-MM-DD_IMP_{topic}.md
+    │   ├── review/                  # REV
+    │   │   └── YYYY-MM-DD_REV_{topic}.md
+    │   ├── testing/                 # TST
+    │   │   └── YYYY-MM-DD_TST_{topic}.md
+    │   └── releases/                # REL
+    │       └── YYYY-MM-DD_REL_v{version}.md
+├── search/                      # 検索系ログ
+    │   └── YYYY-MM-DD_SRC_{topic}.md
+    │
+    ├── res/                         # 研究系ログ
+    │   ├── research/                # SRC
+    │   │   └── YYYY-MM-DD_SRC_{topic}.md
+        ├── experiments/             # EXD
+        │   └── YYYY-MM-DD_EXD_{topic}.md
+        └── analysis/                # ANL
+            └── YYYY-MM-DD_ANL_{topic}.md
+```
+
+---
+
+## 3. 参照
+
+- 権限まとめと禁止事項は [localdocs_rules.instructions.md](localdocs_rules.instructions.md) を参照。
+
+---
+
+## 4. docs/ ディレクトリ自動作成ルール
+
+- 全エージェントはローカルドキュメントを保存する前に、対象プロジェクトのルートディレクトリ直下に `docs/` が存在するか確認する
+- `docs/` が存在しない場合、以下のディレクトリを自動作成する:
+  - `docs/_inbox/`
+  - `docs/shared/tasks/active/`
+  - `docs/shared/tasks/archive/`
+  - `docs/shared/context/`
+  - `docs/shared/impl/decisions/design/`
+  - `docs/shared/impl/decisions/architecture/`
+  - `docs/shared/impl/specs/requirements/`
+  - `docs/shared/impl/specs/interfaces/`
+  - `docs/shared/search/decisions/search/`
+  - `docs/shared/search/specs/search-results/`
+  - `docs/shared/res/decisions/experiment/`
+  - `docs/shared/res/specs/experiment-results/`
+  - `docs/logs/impl/planning/`
+  - `docs/logs/impl/architecture/`
+  - `docs/logs/impl/implementation/`
+  - `docs/logs/impl/review/`
+  - `docs/logs/impl/testing/`
+  - `docs/logs/impl/releases/`
+  - `docs/logs/search/`
+  - `docs/logs/res/research/`
+  - `docs/logs/res/experiments/`
+  - `docs/logs/res/analysis/`
+- `docs/` が既に存在する場合はそのまま使用する
+- 自動作成処理は各エージェントの初回書き込み時に一度だけ実行する
