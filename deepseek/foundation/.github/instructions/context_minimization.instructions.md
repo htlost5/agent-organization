@@ -52,8 +52,10 @@ applyTo: "**/*"
 
 ### インデックス構造（2階層分散）
 
+各プロジェクトの AI 用共有領域 `docs/_agent/shared/context/` 配下に配置する。
+
 ```
-foundation/docs/shared/context/
+<project>/docs/_agent/shared/context/
 ├── project-index.md          ← 全体マスタインデックス（ORC 管理）
 ├── code/project-index.md     ← code ドメインインデックス（DEV/IMP が更新）
 ├── research/project-index.md ← research ドメインインデックス（EXD が更新）

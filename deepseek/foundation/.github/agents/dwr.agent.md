@@ -11,7 +11,7 @@ description: >
   decisions, editing orchestrator configuration, running commands, or editing
   application code.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
+model: DeepSeek: DeepSeek V4 Flash 0731 (openrouter)
 tools: [read, search, edit, todo]
 agents: []
 ---

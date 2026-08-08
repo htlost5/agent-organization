@@ -9,12 +9,14 @@ description: >
   index completion, or dependency mapping. DO NOT use for: web search, code
   editing, design decisions, or code review.
 user-invocable: true
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: DeepSeek: DeepSeek V4 Flash 0731 (openrouter)
 tools: [execute, read, search, open-websearch/search, todo]
 agents: []
 ---
 
 # Code Explorer
+
+> **保存先ルール**: 本エージェントのログ・共有・成果物は、対象プロジェクト内の `docs/_agent/` 配下にのみ保存する（`docs/_agent/shared/`・`docs/_agent/_inbox/`）。`foundation/`・`code/` には保存しない。下記の `shared/`・`_inbox/` は各プロジェクトの `docs/_agent/` 配下を指す。
 
 ## Mission
 

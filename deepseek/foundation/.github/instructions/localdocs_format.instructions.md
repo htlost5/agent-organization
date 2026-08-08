@@ -3,6 +3,8 @@ name: Local Docs Format Rules
 description: Rules for All Files Construction
 ---
 
+> **注**: 本ファイルの `_inbox/`・`shared/`・`logs/`・`archive/` は、各プロジェクト内の `docs/_agent/` 配下を指す（`docs/_agent/_inbox/`・`docs/_agent/shared/`・`docs/_agent/logs/`）。`foundation/`・`code/` 配下にはローカルドキュメントを保存しない。
+
 ## 共通ルール
 
 ### 3.1 フロントマター仕様（全エージェント共通）
@@ -28,12 +30,12 @@ tags:
 
 ### 3.2 ステータス定義
 
-| status       | 意味               | 次のアクション                                |
-|--------------|--------------------|---------------------------------------------|
-| `draft`      | 作成中・未完了      | 作成エージェントが完成後 `pending` へ更新       |
-| `pending`    | レビュー・承認待ち  | Orchestrator または指定エージェントが確認       |
-| `approved`   | 承認済み・正式反映  | 正式ディレクトリへ移動                        |
-| `archived`   | 完了・参照専用      | `archive/` サブフォルダへ移動                 |
+| status     | 意味               | 次のアクション                            |
+| ---------- | ------------------ | ----------------------------------------- |
+| `draft`    | 作成中・未完了     | 作成エージェントが完成後 `pending` へ更新 |
+| `pending`  | レビュー・承認待ち | Orchestrator または指定エージェントが確認 |
+| `approved` | 承認済み・正式反映 | 正式ディレクトリへ移動                    |
+| `archived` | 完了・参照専用     | `archive/` サブフォルダへ移動             |
 
 ### 3.3 タグ体系
 

@@ -8,6 +8,8 @@ applyTo: "**/_inbox/**"
 
 サブエージェント間のタスク引き継ぎに使用する定型フォーマットとルールを定義します。
 
+> **注**: 本ファイルの `_inbox/`・`logs/`・`shared/` は、各プロジェクト内の `docs/_agent/` 配下を指す（`docs/_agent/_inbox/`・`docs/_agent/logs/`・`docs/_agent/shared/`）。`foundation/`・`code/` 配下には保存しない。
+
 ---
 
 ## 1. 基本ルール
@@ -21,11 +23,11 @@ applyTo: "**/_inbox/**"
 
 ## 2. ハンドオフ種別
 
-| Type | 説明 | 使用場面 |
-|------|------|----------|
-| `forward` | 次の工程への通常引き継ぎ | DEV→ARC, ARC→IMP など |
-| `return` | 完了結果の ORC への返却 | 全エージェントの最終返却 |
-| `escalate` | 異常・判断不能時のエスカレーション | 上限超過・矛盾発生時 |
+| Type       | 説明                               | 使用場面                 |
+| ---------- | ---------------------------------- | ------------------------ |
+| `forward`  | 次の工程への通常引き継ぎ           | DEV→ARC, ARC→IMP など    |
+| `return`   | 完了結果の ORC への返却            | 全エージェントの最終返却 |
+| `escalate` | 異常・判断不能時のエスカレーション | 上限超過・矛盾発生時     |
 
 ---
 
@@ -33,7 +35,7 @@ applyTo: "**/_inbox/**"
 
 ```markdown
 ---
-agent: {from_agent}
+agent: { from_agent }
 task_id: TASK-{ID}
 date: YYYY-MM-DD
 status: pending
@@ -42,22 +44,23 @@ destination: logs/{from_agent}/
 related:
   - "[TASK-{ID}](../shared/tasks/active/TASK-{ID}_{title}.md)"
 tags:
-  - {from_agent}
+  - { from_agent }
   - handoff
-  - {category_tag}
+  - { category_tag }
 ---
 
 # HANDOFF: {from_agent} → {to_agent}
 
 ## Metadata
-| Field | Value |
-|-------|-------|
-| **From** | {from_agent} |
-| **To** | {to_agent} |
-| **Task ID** | [TASK-{ID}](../shared/tasks/active/TASK-{ID}_{title}.md) |
-| **Status** | success / partial / failed |
-| **Confidence** | high / medium / low |
-| **Handoff Type** | forward / return / escalate |
+
+| Field            | Value                                                    |
+| ---------------- | -------------------------------------------------------- |
+| **From**         | {from_agent}                                             |
+| **To**           | {to_agent}                                               |
+| **Task ID**      | [TASK-{ID}](../shared/tasks/active/TASK-{ID}_{title}.md) |
+| **Status**       | success / partial / failed                               |
+| **Confidence**   | high / medium / low                                      |
+| **Handoff Type** | forward / return / escalate                              |
 
 ---
 
@@ -67,18 +70,21 @@ tags:
 > 各エージェントは自分の成果を **追記** し、既存内容は **削除しない**。
 
 ### Original Request
+
 {ユーザの元の依頼内容を ORC が記入}
 
 ### Constraints
+
 - {制約1}
 - {制約2}
 
 ### Chain History
-| Step | Agent | Status | Summary |
-|------|-------|--------|---------|
-| 1 | SRC | done | {要約} |
-| 2 | DEV | done | {要約} |
-| 3 | ARC | in_progress | — |
+
+| Step | Agent | Status      | Summary |
+| ---- | ----- | ----------- | ------- |
+| 1    | SRC   | done        | {要約}  |
+| 2    | DEV   | done        | {要約}  |
+| 3    | ARC   | in_progress | —       |
 
 ---
 
@@ -86,41 +92,46 @@ tags:
 
 {自由記述セクション。箇条書き・表・コードブロックなど形式自由。}
 {例:
+
 - 決定事項1: xxx
 - 発見事項1: yyy
 - 推奨案: zzz（根拠: ...）
-}
+  }
 
 ---
 
 ## Artifacts
-| Path | Type | Description |
-|------|------|-------------|
-| `shared/decisions/design/DD-042.md` | decision | 認証機能の設計決定 |
-| `shared/specs/requirements/REQ-042.md` | spec | 認証機能の要件定義 |
+
+| Path                                   | Type     | Description        |
+| -------------------------------------- | -------- | ------------------ |
+| `shared/decisions/design/DD-042.md`    | decision | 認証機能の設計決定 |
+| `shared/specs/requirements/REQ-042.md` | spec     | 認証機能の要件定義 |
 
 ---
 
 ## Open Questions
+
 - {未解決の疑問点1}
 - {未解決の疑問点2}
 
 ---
 
 ## Routing
-| Field | Value |
-|-------|-------|
-| **Next Agent** | {to_agent} |
-| **Blockers** | none / {blocker_description} |
-| **Priority** | high / medium / low |
-| **Deadline** | {if applicable} |
+
+| Field          | Value                        |
+| -------------- | ---------------------------- |
+| **Next Agent** | {to_agent}                   |
+| **Blockers**   | none / {blocker_description} |
+| **Priority**   | high / medium / low          |
+| **Deadline**   | {if applicable}              |
 
 ---
 
 ## ORC Approval（ORC が最終確認時に記入）
+
 - [ ] Approved — proceed to {to_agent}
-- [ ] Re-routed to: ___
-- Notes: ___
+- [ ] Re-routed to: \_\_\_
+- Notes: \_\_\_
 ```
 
 ---
@@ -189,6 +200,7 @@ ORC → DEV → ARC → IMP → REV → TST → ORC
 ```
 
 ### チェーン委譲時の特則
+
 - ORC は最初の DEV にのみ Task Context を注入する。
 - 各エージェントは HANDOFF の `Routing.Next Agent` を確認し、指定されたエージェントに直接委譲する。
 - CRITICAL 差し戻し（REV→IMP, TST→IMP）が発生した場合、差し戻し元は ORC にも通知する（CC）。
@@ -202,10 +214,11 @@ ORC → DEV → ARC → IMP → REV → TST → ORC
 
 ```markdown
 ## Escalation Details
-| Field | Value |
-|-------|-------|
-| **Reason** | {エスカレーション理由} |
-| **Attempts** | {試行回数} / {上限} |
-| **Last Error** | {最後のエラー内容} |
+
+| Field                | Value                      |
+| -------------------- | -------------------------- |
+| **Reason**           | {エスカレーション理由}     |
+| **Attempts**         | {試行回数} / {上限}        |
+| **Last Error**       | {最後のエラー内容}         |
 | **Suggested Action** | {推奨される次のアクション} |
 ```

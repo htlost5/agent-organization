@@ -5,6 +5,8 @@ description: Common rules for all agents
 
 ## 1. 権限まとめ
 
+> **注**: 下表の `_inbox/`・`shared/`・`logs/` は、各プロジェクトの `docs/_agent/` 配下（`docs/_agent/_inbox/`・`docs/_agent/shared/`・`docs/_agent/logs/`）を指す。`foundation/`・`code/` 配下にはローカルドキュメントを保存しない。
+
 | エージェント | `_inbox/` | `shared/tasks/` | `shared/impl/decisions/` | `shared/impl/specs/` | `shared/res/decisions/` | `shared/res/specs/` | `shared/search/` | `shared/context/` | `logs/impl/` | `logs/res/` | `logs/search/` |
 | ------------ | --------- | --------------- | ------------------------ | ------------------- | ----------------------- | ------------------ | ---------------- | ----------------- | ------------ | ----------- | -------------- |
 | **ORC**      | ✅        | ✅ 書込         | 読取のみ                 | 読取のみ            | 読取のみ                 | 読取のみ           | —                | ✅ 管理           | —            | —           | —              |

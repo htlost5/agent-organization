@@ -85,13 +85,6 @@ flow_shortcuts:
     flow: [SRC]
     skip: [DEV, ARC, IMP, REV, TST]
 
-  qgis:
-    description: "QGIS map data operations, coordinate transforms, layer operations, style definitions, exports — no agent edits .qgz/.qmd/.qgs/.qml/.qlr/.qpt files"
-    flow: [QGO]
-    skip: [DEV, ARC, IMP, REV, TST, SRC, EXD, ANL]
-    optional: [QGA]
-    note: "QGO is the single entry point for all QGIS tasks. QGA is invoked by QGO internally when design decisions are needed. ORC and all other agents MUST NOT perform QGIS operations directly. QGIS proprietary files (.qgz/.qmd/.qgs/.qml/.qlr/.qpt) MUST NOT be edited by any agent — only the user edits these in QGIS desktop."
-
   document:
     description: "structured document generation (design docs, specs, knowledge base)"
     flow: [DWR]

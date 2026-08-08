@@ -16,6 +16,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 - **qgis**（任意）: QGIS Architect, QGIS Operator — GIS 操作タスク時に追加
 
 ### 配置ルール
+
 - foundation は**常に配置**され、ORC が稼働する
 - code, research, surfing, qgis は**タスク種別に応じて選択的に追加**する
 - code のみ / research のみ / surfing のみ / qgis のみ / 複数ドメイン同時、いずれも可能
@@ -26,25 +27,26 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 
 ## 1. エージェントエコシステム概要
 
-| ID | 名称 | 役割 | 種別 | 所属 |
-|----|------|------|------|------|
-| ORC | Orchestrator | タスク受付・フロー設計・サブエージェント統制・完了判定 | 司令塔 | foundation |
-| SRC | Searcher | Web/論文/技術文書の検索・収集（汎用/研究系/技術系の3モード） | 検索系 | surfing |
-| AGM | Agent Manager (Architect) | プロジェクト固有エージェント定義の設計・レビュー | 管理系 | foundation |
-| AGI | Agent Manager (Implementer) | プロジェクト固有エージェント定義の実装・配置 | 管理系 | foundation |
-| DWR | Document Writer | ORC/他エージェントの成果物から設計書・仕様書・知識ベース文書を生成 | 文書生成系 | foundation |
-| DEV | DevPlanner | 要件分析・機能仕様決定・設計判断（何を作るか） | 実装系 | code |
-| ARC | Architect | アーキテクチャ設計・技術スタック選定・IF仕様策定（どう作るか） | 実装系 | code |
-| IMP | Implementer | コード実装・デバッグ | 実装系 | code |
-| REV | Reviewer | コードレビュー・セキュリティチェック・仕様準拠検証 | 実装系 | code |
-| TST | Tester | テスト実行・合否判定 | 実装系 | code |
-| REL | Release Manager | git管理・バージョニング・タグ付け（ユーザ指定時のみ。独立セッションまたは ORC からの同一セッション委譲で起動） | 独立リリース系 | code |
-| EXD | Experiment Designer | 実験設計・評価指標定義・ベンチマーク設計 | 研究系 | research |
-| ANL | Analyst | 調査/実験結果の分析・最適解導出 | 研究系 | research |
-| QGA | QGIS Architect | QGIS 操作の設計判断（手法選定・ワークフロー設計） | GIS 操作系 | qgis |
-| QGO | QGIS Operator | QGIS タスク一次受け・Qgis_mcp 経由の操作実行 | GIS 操作系 | qgis |
+| ID  | 名称                        | 役割                                                                                                           | 種別           | 所属       |
+| --- | --------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------- | ---------- |
+| ORC | Orchestrator                | タスク受付・フロー設計・サブエージェント統制・完了判定                                                         | 司令塔         | foundation |
+| SRC | Searcher                    | Web/論文/技術文書の検索・収集（汎用/研究系/技術系の3モード）                                                   | 検索系         | surfing    |
+| AGM | Agent Manager (Architect)   | プロジェクト固有エージェント定義の設計・レビュー                                                               | 管理系         | foundation |
+| AGI | Agent Manager (Implementer) | プロジェクト固有エージェント定義の実装・配置                                                                   | 管理系         | foundation |
+| DWR | Document Writer             | ORC/他エージェントの成果物から設計書・仕様書・知識ベース文書を生成                                             | 文書生成系     | foundation |
+| DEV | DevPlanner                  | 要件分析・機能仕様決定・設計判断（何を作るか）                                                                 | 実装系         | code       |
+| ARC | Architect                   | アーキテクチャ設計・技術スタック選定・IF仕様策定（どう作るか）                                                 | 実装系         | code       |
+| IMP | Implementer                 | コード実装・デバッグ                                                                                           | 実装系         | code       |
+| REV | Reviewer                    | コードレビュー・セキュリティチェック・仕様準拠検証                                                             | 実装系         | code       |
+| TST | Tester                      | テスト実行・合否判定                                                                                           | 実装系         | code       |
+| REL | Release Manager             | git管理・バージョニング・タグ付け（ユーザ指定時のみ。独立セッションまたは ORC からの同一セッション委譲で起動） | 独立リリース系 | code       |
+| EXD | Experiment Designer         | 実験設計・評価指標定義・ベンチマーク設計                                                                       | 研究系         | research   |
+| ANL | Analyst                     | 調査/実験結果の分析・最適解導出                                                                                | 研究系         | research   |
+| QGA | QGIS Architect              | QGIS 操作の設計判断（手法選定・ワークフロー設計）                                                              | GIS 操作系     | qgis       |
+| QGO | QGIS Operator               | QGIS タスク一次受け・Qgis_mcp 経由の操作実行                                                                   | GIS 操作系     | qgis       |
 
 ### トポロジー
+
 - ORC を中心とする**スター型**。全タスクは ORC 経由で発行・返却される。
 - 実装系フロー: `ORC → DEV → ARC → IMP → REV → TST → ORC → (askQuestions 承認) → REL → ORC`
 - 研究系フロー: `ORC → EXD → ANL → ORC`
@@ -59,6 +61,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 ## 2. 全エージェント共通行動規範
 
 ### 2.1 判断と委譲
+
 - **未確定事項は推測で確定しない。** 必ず ORC 経由でユーザに確認する。
 - **自身の Scope 外の判断は行わない。** 該当する専門エージェントに委譲する。
 - **QGIS に関するタスク（地図データ操作・座標系変換・レイヤ操作・スタイル定義・エクスポート等）は、すべて QGIS ドメインの QGO（QGIS Operator）に委譲する。** ORC および code ドメインのエージェントは、これらの操作を一切自ら行ってはならない。
@@ -67,6 +70,7 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 - サブエージェント間の結論が割れた場合は、Orchestrator が最終決定権を持つ。
 
 ### 2.2 出力規約
+
 - 出力は**必要最小限**に留める。冗長な説明を避ける。
 - 全サブエージェントは以下の共通インターフェースで結果を返却する：
   - `status`: 成功 / 部分成功 / 失敗
@@ -77,12 +81,14 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 - 役割別の追加項目は上記に上乗せする形で必要最小限に留める。
 
 ### 2.3 ファイル操作
+
 - 他エージェントの成果物を**無断で書き換えない**。
 - `shared/` 内の承認済みファイルを無断で変更しない。差分提案は `_inbox/` 経由で行う。
 - `logs/` 内のファイルは参照専用。後工程への引き継ぎは `shared/` を使う。
 - `shared/context/project-meta.md` と `glossary.md` の更新は必ず Orchestrator の承認を経る。
 
 ### 2.4 失敗時対応
+
 - 失敗時は**原因を特定**し、再試行またはエスカレーションの判断材料を添えて ORC に返す。
 - 同一箇所の修正サイクル上限（`ops_config.yml` の `fix_cycles`）を超えた場合は ORC にエスカレーションする。
 
@@ -90,9 +96,12 @@ Local Docs ディレクトリ構造・権限マトリクス・ファイル命名
 
 ## 3. Local Docs ディレクトリ構造（簡略リファレンス）
 
+> **配置場所**: 下記の構造は、**各プロジェクト内の `docs/_agent/`** 配下に配置する（`docs/_agent/_inbox/`・`docs/_agent/shared/`・`docs/_agent/logs/`）。`foundation/`・`code/` 配下にはローカルドキュメントを保存しない。人間が読む設計書（`docs/architect/`・`docs/research/`・`docs/knowledge/`）はルート `docs/` 配下に、プロジェクト固有の人間用ドキュメントは各プロジェクトの `docs/` に配置する。
+
 ```
-docs/
+<project>/docs/_agent/
 ├── _inbox/                  ← 全エージェントの一時書き込み場所（必須経由）
+├── _archive/                ← 破棄・完了済みの一時ファイル
 ├── shared/
 │   ├── tasks/active/        ← 進行中タスク（ORC 管理）
 │   ├── impl/                ← 実装系共有（decisions/specs）
@@ -105,7 +114,7 @@ docs/
     └── search/              ← 検索系ログ（search）
 ```
 
-**最重要ルール**: `_inbox/` をスキップして直接 `shared/` や `logs/` に書き込まないこと。
+**最重要ルール**: `_inbox/` をスキップして直接 `shared/` や `logs/` に書き込まないこと。`foundation/`・`code/` には保存しないこと。
 
 詳細な権限マトリクス・禁止事項は `.github/instructions/localdocs_rules.instructions.md` を参照。
 
@@ -113,18 +122,18 @@ docs/
 
 ## 4. ファイル命名規則
 
-| 種別 | 命名規則 | 例 |
-|------|----------|-----|
-| `_inbox/` 一時ファイル | `YYYY-MM-DD_HHMM_{AgentID}_{slug}.md` | `2026-06-08_1430_DEV_auth-design.md` |
-| `logs/` ログファイル | `YYYY-MM-DD_{AgentID}_{topic}.md` | `2026-06-08_IMP_auth-implementation.md` |
-| タスク定義 | `TASK-{ID}_{title}.md` | `TASK-042_build-auth.md` |
-| 設計決定 (DEV) | `DD-{ID}_{title}.md` | `DD-042_auth-flow.md` |
-| アーキテクチャ決定 (ARC) | `ADR-{ID}_{title}.md` | `ADR-042_jwt-strategy.md` |
-| 実験設計 (EXD) | `EXP-{ID}_{title}.md` | `EXP-015_benchmark-design.md` |
-| 要件定義 | `REQ-{ID}_{title}.md` | `REQ-042_auth-spec.md` |
-| IF仕様 | `IF-{ID}_{title}.md` | `IF-042_auth-api.md` |
-| 調査方針 (SRC) | `SD-{ID}_{title}.md` | `SD-042_auth-search-plan.md` |
-| 調査結果 (SRC) | `SR-{ID}_{title}.md` | `SR-042_auth-search-results.md` |
+| 種別                     | 命名規則                              | 例                                      |
+| ------------------------ | ------------------------------------- | --------------------------------------- |
+| `_inbox/` 一時ファイル   | `YYYY-MM-DD_HHMM_{AgentID}_{slug}.md` | `2026-06-08_1430_DEV_auth-design.md`    |
+| `logs/` ログファイル     | `YYYY-MM-DD_{AgentID}_{topic}.md`     | `2026-06-08_IMP_auth-implementation.md` |
+| タスク定義               | `TASK-{ID}_{title}.md`                | `TASK-042_build-auth.md`                |
+| 設計決定 (DEV)           | `DD-{ID}_{title}.md`                  | `DD-042_auth-flow.md`                   |
+| アーキテクチャ決定 (ARC) | `ADR-{ID}_{title}.md`                 | `ADR-042_jwt-strategy.md`               |
+| 実験設計 (EXD)           | `EXP-{ID}_{title}.md`                 | `EXP-015_benchmark-design.md`           |
+| 要件定義                 | `REQ-{ID}_{title}.md`                 | `REQ-042_auth-spec.md`                  |
+| IF仕様                   | `IF-{ID}_{title}.md`                  | `IF-042_auth-api.md`                    |
+| 調査方針 (SRC)           | `SD-{ID}_{title}.md`                  | `SD-042_auth-search-plan.md`            |
+| 調査結果 (SRC)           | `SR-{ID}_{title}.md`                  | `SR-042_auth-search-results.md`         |
 
 ---
 
@@ -134,22 +143,23 @@ docs/
 
 ```yaml
 ---
-agent: {AgentID}              # 例: SRC, ORC, ARC
-task_id: TASK-{ID}            # 紐付けタスクID
-date: YYYY-MM-DD              # 作成日
-status: draft                 # draft | pending | approved | archived
-category: shared | log        # 共有情報か作業ログか
-destination: shared/impl/specs/requirements/  # 正式保存先パス
-related:                      # 関連ノートへの local docs 内部リンク
+agent: { AgentID } # 例: SRC, ORC, ARC
+task_id: TASK-{ID} # 紐付けタスクID
+date: YYYY-MM-DD # 作成日
+status: draft # draft | pending | approved | archived
+category: shared | log # 共有情報か作業ログか
+destination: shared/impl/specs/requirements/ # 正式保存先パス
+related: # 関連ノートへの local docs 内部リンク
   - "[TASK-042_build-auth](../shared/tasks/active/TASK-042_build-auth.md)"
 tags:
-  - {AgentID}
-  - {category-tag}
-  - {task_id}
+  - { AgentID }
+  - { category-tag }
+  - { task_id }
 ---
 ```
 
 ### ステータス遷移
+
 `draft` → `pending`（レビュー依頼） → `approved`（正式反映） → `archived`（完了）
 
 ---
@@ -160,6 +170,7 @@ tags:
 形式・記入要領の詳細は `.github/instructions/handoff_protocol.instructions.md` を参照。
 
 ### 基本ルール
+
 - ORC が初回ハンドオフに `Task Context` を注入し、チェーン内の全エージェントが継承・追記する。
 - チェーン委譲モードでは、ORC を経由せずサブエージェント間で直接ハンドオフする。
 - ハンドオフには必ず `status / confidence / artifacts / open_questions / routing` を含める。
@@ -172,6 +183,7 @@ ORC の負荷軽減のため、実装タスクは条件に応じてチェーン�
 詳細な発動条件・動作・フロー短縮ルールは `code/.github/copilot-instructions.md` を参照すること。
 
 ### 基本ルール
+
 - ORC が初回ハンドオフに `Task Context` を注入し、チェーン内の全エージェントが継承・追記する。
 - チェーン委譲モードでは、ORC を経由せずサブエージェント間で直接ハンドオフする。
 - ハンドオフには必ず `status / confidence / artifacts / open_questions / routing` を含める。
@@ -183,6 +195,7 @@ ORC の負荷軽減のため、実装タスクは条件に応じてチェーン�
 詳細なエラーハンドリングルールは `.github/config/ops_config.yml` の `error_handling` セクションを参照。
 
 ### 基本原則
+
 1. 失敗時は**原因を特定**してから再試行する（単純再実行は避ける）。
 2. 上限回数を超えたら**エスカレーション**する（ORC → ユーザ）。
 3. 同一エージェントペア間の往復が 3 回を超えたら ORC が**強制中断**しユーザに判断を仰ぐ。

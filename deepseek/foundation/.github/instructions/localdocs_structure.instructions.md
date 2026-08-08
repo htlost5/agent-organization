@@ -33,6 +33,26 @@ description: Define the Local Docs Directory Structure
 
 ---
 
+## 0. 配置場所の前提（重要）
+
+本共通基盤はエージェント定義・共通指示の**専用領域**であり、**実際のローカルドキュメント（ログ・タスク・共有・設計書）は保存しない**。
+
+各プロジェクト（`mobile/`・`position-engine/`・`research/` 等）の AI 用ファイルは、**各プロジェクト内の `docs/_agent/`** 配下に配置する。
+
+```
+<project>/docs/_agent/
+├── _inbox/          # 一時書き込み（承認前の提案・ハンドオフ）
+├── _archive/        # 破棄・完了済みの一時ファイル
+├── logs/            # 各エージェントの作業ログ（impl/ 以下に planning/architecture/implementation/review/testing/releases）
+└── shared/          # エージェント間共有（tasks/・context/・impl/・search/・res/）
+```
+
+- **人間が読む設計・仕様ドキュメント**（複数プロジェクト横断）はルート `docs/architect/`・`docs/research/`・`docs/knowledge/`、プロジェクト固有のものは各プロジェクトの `docs/` に保存する。
+- **`foundation/`・`code/` には実コンテンツ（ログ・タスク・設計書）を一切保存しない**。AI 用ファイルの配置先は各プロジェクトの `docs/_agent/`、人間用ドキュメントの配置先は各プロジェクトの `docs/`（またはルート `docs/`）である。
+- 下記の構造図は、`<project>/docs/_agent/` 配下を基準として読むこと（`docs/` と表記のある箇所は `docs/_agent/` と読み替える）。
+
+---
+
 ## 2. ディレクトリ構造
 
 ```
@@ -116,29 +136,31 @@ docs/
 
 ## 4. docs/ ディレクトリ自動作成ルール
 
-- 全エージェントはローカルドキュメントを保存する前に、対象プロジェクトのルートディレクトリ直下に `docs/` が存在するか確認する
-- `docs/` が存在しない場合、以下のディレクトリを自動作成する:
-  - `docs/_inbox/`
-  - `docs/shared/tasks/active/`
-  - `docs/shared/tasks/archive/`
-  - `docs/shared/context/`
-  - `docs/shared/impl/decisions/design/`
-  - `docs/shared/impl/decisions/architecture/`
-  - `docs/shared/impl/specs/requirements/`
-  - `docs/shared/impl/specs/interfaces/`
-  - `docs/shared/search/decisions/search/`
-  - `docs/shared/search/specs/search-results/`
-  - `docs/shared/res/decisions/experiment/`
-  - `docs/shared/res/specs/experiment-results/`
-  - `docs/logs/impl/planning/`
-  - `docs/logs/impl/architecture/`
-  - `docs/logs/impl/implementation/`
-  - `docs/logs/impl/review/`
-  - `docs/logs/impl/testing/`
-  - `docs/logs/impl/releases/`
-  - `docs/logs/search/`
-  - `docs/logs/res/research/`
-  - `docs/logs/res/experiments/`
-  - `docs/logs/res/analysis/`
-- `docs/` が既に存在する場合はそのまま使用する
+- 全エージェントはローカルドキュメントを保存する前に、対象プロジェクトのルートディレクトリ直下に `docs/_agent/` が存在するか確認する
+- `docs/_agent/` が存在しない場合、以下のディレクトリを自動作成する:
+  - `docs/_agent/_inbox/`
+  - `docs/_agent/_archive/`
+  - `docs/_agent/shared/tasks/active/`
+  - `docs/_agent/shared/tasks/archive/`
+  - `docs/_agent/shared/context/`
+  - `docs/_agent/shared/impl/decisions/design/`
+  - `docs/_agent/shared/impl/decisions/architecture/`
+  - `docs/_agent/shared/impl/specs/requirements/`
+  - `docs/_agent/shared/impl/specs/interfaces/`
+  - `docs/_agent/shared/search/decisions/search/`
+  - `docs/_agent/shared/search/specs/search-results/`
+  - `docs/_agent/shared/res/decisions/experiment/`
+  - `docs/_agent/shared/res/specs/experiment-results/`
+  - `docs/_agent/logs/impl/planning/`
+  - `docs/_agent/logs/impl/architecture/`
+  - `docs/_agent/logs/impl/implementation/`
+  - `docs/_agent/logs/impl/review/`
+  - `docs/_agent/logs/impl/testing/`
+  - `docs/_agent/logs/impl/releases/`
+  - `docs/_agent/logs/search/`
+  - `docs/_agent/logs/res/research/`
+  - `docs/_agent/logs/res/experiments/`
+  - `docs/_agent/logs/res/analysis/`
+- `docs/_agent/` が既に存在する場合はそのまま使用する
 - 自動作成処理は各エージェントの初回書き込み時に一度だけ実行する
+- **`foundation/`・`code/` 直下に `docs/` を自動作成・利用しない**（エージェント定義専用領域のため）

@@ -11,7 +11,7 @@ description: >
   designs. DO NOT use for: editing core system agents, writing to localdocs,
   or independent design work.
 user-invocable: true
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: DeepSeek: DeepSeek V4 Flash 0731 (openrouter)
 tools: [read, edit, search, open-websearch/search, todo]
 agents: []
 ---

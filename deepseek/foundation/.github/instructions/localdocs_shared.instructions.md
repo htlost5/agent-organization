@@ -5,6 +5,8 @@ description: Rules for shared task, decision, spec, and context files
 
 # shared/ フォルダ詳細仕様
 
+> **注**: 本ファイルの `shared/` は、各プロジェクト内の `docs/_agent/shared/` 配下を指す（`docs/_agent/shared/tasks/`・`docs/_agent/shared/impl/` 等）。`foundation/`・`code/` 配下にはローカルドキュメントを保存しない。
+
 ## 目的
 
 - 複数エージェントが参照・引き継ぐ情報を格納する。
