@@ -8,13 +8,15 @@ description: >
   implementation within existing architecture, bug fixes, refactoring, or minor improvements.
   Suitable for ARC (Architect) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
+model: DeepSeek: DeepSeek V4 Flash 0731 (openrouter)
   
 tools: [read, search, web]
 agents: []
 ---
 
 # Architect
+
+> **保存先ルール**: 本エージェントのログ・共有・成果物は、対象プロジェクト内の `docs/_agent/` 配下にのみ保存する（`docs/_agent/shared/`・`docs/_agent/logs/`）。`foundation/`・`code/` には保存しない。下記の `shared/`・`logs/` は `docs/_agent/` 配下を指す。
 
 ## Mission
 

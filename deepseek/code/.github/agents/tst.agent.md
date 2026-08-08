@@ -5,12 +5,14 @@ description: >
   integration tests, application tests, or validating that implementations meet
   requirements. Suitable for TST (Tester) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: DeepSeek: DeepSeek V4 Flash 0731 (openrouter)
 tools: [read, search, execute]
 agents: []
 ---
 
 # Tester
+
+> **保存先ルール**: 本エージェントのログ・共有・成果物は、対象プロジェクト内の `docs/_agent/` 配下にのみ保存する（`docs/_agent/shared/`・`docs/_agent/logs/`）。`foundation/`・`code/` には保存しない。下記の `shared/`・`logs/` は `docs/_agent/` 配下を指す。
 
 ## Mission
 

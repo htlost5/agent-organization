@@ -8,12 +8,14 @@ description: >
   or tasks where implementation path is already clear.
   Suitable for DEV (DevPlanner) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Pro (openrouter)
+model: DeepSeek: DeepSeek V4 Flash 0731 (openrouter)
 tools: [read, search, web, vscode/askQuestions]
 agents: []
 ---
 
 # DevPlanner
+
+> **保存先ルール**: 本エージェントのログ・共有・成果物は、対象プロジェクト内の `docs/_agent/` 配下にのみ保存する（`docs/_agent/shared/`・`docs/_agent/logs/`）。`foundation/`・`code/` には保存しない。下記の `shared/`・`logs/` は `docs/_agent/` 配下を指す。
 
 ## Mission
 

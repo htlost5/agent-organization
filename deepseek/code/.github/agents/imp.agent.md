@@ -5,12 +5,14 @@ description: >
   Use when: implementing features, writing code, fixing bugs, or debugging
   applications. Suitable for IMP (Implementer) agent role.
 user-invocable: false
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: DeepSeek: DeepSeek V4 Flash 0731 (openrouter)
 tools: [read, search, edit, execute]
 agents: []
 ---
 
 # Implementer
+
+> **保存先ルール**: 本エージェントのログ・共有・成果物は、対象プロジェクト内の `docs/_agent/` 配下にのみ保存する（`docs/_agent/shared/`・`docs/_agent/logs/`）。`foundation/`・`code/` には保存しない。下記の `shared/`・`logs/` は `docs/_agent/` 配下を指す。
 
 ## Mission
 

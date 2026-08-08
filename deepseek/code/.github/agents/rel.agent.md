@@ -7,7 +7,7 @@ description: >
   git tagging, or handling version management for DWR-generated documents.
   Suitable for REL (Release Manager) agent role.
 user-invocable: true
-model: DeepSeek: DeepSeek V4 Flash (openrouter)
+model: DeepSeek: DeepSeek V4 Flash 0731 (openrouter)
 tools: [read, search, execute]
 agents: []
 ---
@@ -17,6 +17,8 @@ agents: []
 ## Mission
 
 実装コードがユーザにより適用済みであることを前提に、git 操作（バージョンバンプ、commit、tag 作成、CHANGELOG 管理）を実行する。アプリケーションビルドは一切含めない。実装チェーンから分離された独立セッション、または ORC からの同一セッション内委譲で起動される。
+
+> **保存先ルール**: 本エージェントのログ・共有・成果物は、対象プロジェクト内の `docs/_agent/` 配下にのみ保存する（`docs/_agent/shared/`・`docs/_agent/logs/`）。`foundation/`・`code/` には保存しない。下記の `shared/`・`logs/` は `docs/_agent/` 配下を指す。
 
 ## Scope
 
